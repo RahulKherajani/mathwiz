@@ -10,9 +10,14 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MathWiz">
         <activity
+            android:name=".LoginActivity"
+            android:exported="false"
+            android:label="@string/title_login"
+            android:theme="@style/Theme.MathWiz.NoActionBar" />
+        <activity
             android:name=".HomeActivity"
             android:exported="true"
-            android:label="@string/title_activity_" >
+            android:label="@string/title_activity_">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -21,8 +26,7 @@
         </activity>
         <activity
             android:name=".MainActivity"
-            android:exported="true">
-        </activity>
+            android:exported="true" />
     </application>
 
 </manifest>

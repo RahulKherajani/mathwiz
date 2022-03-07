@@ -1,8 +1,26 @@
 <resources>
+    <!-- Titles -->
     <string name="app_name">MathWiz</string>
     <string name="title_activity_">Activity</string>
     <string name="title_categories">Categories</string>
     <string name="title_statistics">Statistics</string>
     <string name="title_profile">Profile</string>
     <string name="title_reminders">Reminders</string>
+    <string name="title_login">Login</string>
+    <string name="title_change_password">Change Password</string>
+    <string name="title_signup">Sign Up</string>
+
+    <!-- Strings used for fragments for navigation -->
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <!-- Strings used for login/signup -->
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="new_password">New Password</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="security_code">Security Code</string>
+    <string name="forgot_password">Forgot Password?</string>
+    <string name="save">Save</string>
+
 </resources>

@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import com.example.mathwiz.R
 
@@ -28,22 +29,27 @@ class ProfileEditFragment : Fragment(), View.OnClickListener {
 
 
     override fun onClick(v: View?) {
+        val layout : ConstraintLayout? = activity?.findViewById(R.id.container)
         when (v?.id) {
             R.id.save_button -> {
                 Log.e("ProfileFragment", "save")
 
                 // todo save data
-                activity?.supportFragmentManager
-                    ?.beginTransaction()
-                    ?.replace(R.id.profile_edit_fragment,ProfileFragment())
-                    ?.commit()
+                layout?.id?.let {
+                    activity?.supportFragmentManager
+                        ?.beginTransaction()
+                        ?.replace(it,ProfileFragment())
+                        ?.commit()
+                }
             }
             R.id.cancel_button ->{
                 Log.e("ProfileFragment","cancel")
-                activity?.supportFragmentManager
-                    ?.beginTransaction()
-                    ?.replace(R.id.profile_edit_fragment,ProfileFragment())
-                    ?.commit()
+                layout?.id?.let {
+                    activity?.supportFragmentManager
+                        ?.beginTransaction()
+                        ?.replace(it,ProfileFragment())
+                        ?.commit()
+                }
             }
             else -> {
             }

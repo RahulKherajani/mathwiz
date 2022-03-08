@@ -6,9 +6,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.FrameLayout
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentTransaction
 import com.example.mathwiz.R
+import com.example.mathwiz.ui.login.LoginFragment
+import com.example.mathwiz.ui.signup.SignupFragment
 
 class ProfileFragment : Fragment(), View.OnClickListener {
 
@@ -27,17 +30,39 @@ class ProfileFragment : Fragment(), View.OnClickListener {
 
 
     override fun onClick(v: View?) {
+
+        val layout : ConstraintLayout? = activity?.findViewById(R.id.container)
         when (v?.id) {
             R.id.edit_button -> {
                 Log.e("ProfileFragment", "Edit Profile")
-                activity?.supportFragmentManager
-                    ?.beginTransaction()
-                    ?.replace(R.id.profile_fragment, ProfileEditFragment())
-                    ?.commit()
+                layout?.id?.let {
+                    activity?.supportFragmentManager
+                        ?.beginTransaction()
+                        ?.replace(it, ProfileEditFragment())
+                        ?.commit()
+                }
             }
             R.id.sign_or_logout_button ->{
                 // todo navigate to sign up or logout
                 Log.e("ProfileFragment","Sign Up or Logout")
+
+                val login : Boolean = false
+                if (login) {
+                    Log.e("ProfileFragment","Have Login")
+                    layout?.id?.let {
+                        activity?.supportFragmentManager
+                            ?.beginTransaction()
+                            ?.replace(it, LoginFragment())
+                            ?.commit()
+                    }
+                }else{
+                    layout?.id?.let {
+                        activity?.supportFragmentManager
+                            ?.beginTransaction()
+                            ?.replace(it, SignupFragment())
+                            ?.commit()
+                    }
+                }
             }
             else -> {
             }

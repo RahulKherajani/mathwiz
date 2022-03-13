@@ -3,16 +3,17 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="app/src/main/res/layout/activity_home.xml" value="0.4041666666666667" />
-        <entry key="app/src/main/res/layout/activity_login.xml" value="0.3446557971014493" />
-        <entry key="app/src/main/res/layout/activity_main.xml" value="0.4041666666666667" />
-        <entry key="app/src/main/res/layout/activity_quiz.xml" value="0.4041666666666667" />
-        <entry key="app/src/main/res/layout/fragment_login.xml" value="0.3446557971014493" />
-        <entry key=".app/src/main/res/layout/fragment_profile.xml" value="0.3446557971014493" />
-        <entry key="app/src/main/res/layout/fragment_quiz_description.xml" value="0.4041666666666667" />
-        <entry key="app/src/main/res/layout/fragment_quiz_question.xml" value="0.4041666666666667" />
-        <entry key="app/src/main/res/layout/fragment_quiz_result.xml" value="0.4041666666666667" />
-        <entry key="app/src/main/res/layout/fragment_signup.xml" value="0.3446557971014493" />
+        <entry key="..\:/Users/Kalim/AndroidStudioProjects/mathwiz/app/src/main/res/layout/activity_home.xml" value="0.4041666666666667" />
+        <entry key="..\:/Users/Kalim/AndroidStudioProjects/mathwiz/app/src/main/res/layout/activity_login.xml" value="0.3446557971014493" />
+        <entry key="..\:/Users/Kalim/AndroidStudioProjects/mathwiz/app/src/main/res/layout/activity_main.xml" value="0.4041666666666667" />
+        <entry key="..\:/Users/Kalim/AndroidStudioProjects/mathwiz/app/src/main/res/layout/activity_quiz.xml" value="0.4041666666666667" />
+        <entry key="..\:/Users/Kalim/AndroidStudioProjects/mathwiz/app/src/main/res/layout/fragment_change_password.xml" value="0.26268115942028986" />
+        <entry key="..\:/Users/Kalim/AndroidStudioProjects/mathwiz/app/src/main/res/layout/fragment_login.xml" value="0.3446557971014493" />
+        <entry key="..\:/Users/Kalim/AndroidStudioProjects/mathwiz/app/src/main/res/layout/fragment_profile.xml" value="0.3446557971014493" />
+        <entry key="..\:/Users/Kalim/AndroidStudioProjects/mathwiz/app/src/main/res/layout/fragment_quiz_description.xml" value="0.4041666666666667" />
+        <entry key="..\:/Users/Kalim/AndroidStudioProjects/mathwiz/app/src/main/res/layout/fragment_quiz_question.xml" value="0.4041666666666667" />
+        <entry key="..\:/Users/Kalim/AndroidStudioProjects/mathwiz/app/src/main/res/layout/fragment_quiz_result.xml" value="0.4041666666666667" />
+        <entry key="..\:/Users/Kalim/AndroidStudioProjects/mathwiz/app/src/main/res/layout/fragment_signup.xml" value="0.3446557971014493" />
         <entry key="app/src/main/res/drawable-anydpi/ic_profile.xml" value="0.3535" />
         <entry key="app/src/main/res/drawable-anydpi/ic_statistics.xml" value="0.3535" />
         <entry key="app/src/main/res/drawable/ic_undraw_login_re_4vu2.xml" value="0.2905" />

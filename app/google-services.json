@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "947791117551",
+    "project_id": "mathwiz-ed9ff",
+    "storage_bucket": "mathwiz-ed9ff.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:947791117551:android:e062e566317cc0269b2f1a",
+        "android_client_info": {
+          "package_name": "com.example.mathwiz"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "947791117551-tu54ppd3ov7rpvfi3u379hlcgvdgq7s8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB0gxBxl8MSLapFWga3vhgOmBlRFxlxGzU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "947791117551-tu54ppd3ov7rpvfi3u379hlcgvdgq7s8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -29,21 +29,4 @@
         android:label="@string/title_reminders"
         tools:layout="@layout/fragment_reminders" />
 
-    <fragment
-        android:id="@+id/navigation_login"
-        android:name="com.example.mathwiz.ui.login.LoginFragment"
-        android:label="@string/title_login"
-        tools:layout="@layout/fragment_login" />
-
-    <fragment
-        android:id="@+id/navigation_change_Password"
-        android:name="com.example.mathwiz.ui.changePassword.ChangePasswordFragment"
-        android:label="@string/title_change_password"
-        tools:layout="@layout/fragment_change_password" />
-
-    <fragment
-        android:id="@+id/navigation_signup"
-        android:name="com.example.mathwiz.ui.signup.SignupFragment"
-        android:label="@string/title_signup"
-        tools:layout="@layout/fragment_signup" />
 </navigation>

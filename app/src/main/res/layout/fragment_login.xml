@@ -59,6 +59,13 @@
             android:layout_width="250dp"
             android:layout_height="wrap_content"
             android:text="@string/title_login"
+            android:layout_above="@+id/signupButton" />
+
+        <Button
+            android:id="@+id/signupButton"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:text="@string/title_signup"
             android:layout_above="@+id/forgotPasswordButton" />
 
         <Button

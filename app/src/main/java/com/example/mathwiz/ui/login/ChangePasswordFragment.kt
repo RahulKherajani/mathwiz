@@ -1,6 +1,5 @@
 package com.example.mathwiz.ui.login
 
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -9,7 +8,6 @@ import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import com.example.mathwiz.R
 import com.example.mathwiz.databinding.FragmentChangePasswordBinding
-import com.example.mathwiz.databinding.FragmentLoginBinding
 import com.google.android.material.snackbar.BaseTransientBottomBar
 import com.google.android.material.snackbar.Snackbar
 
@@ -34,9 +32,17 @@ class ChangePasswordFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.savePasswordButton.setOnClickListener {
+            //if(binding.etNewPassword == binding.etConfirmPassword){
+                findNavController().navigate(R.id.action_ChangePasswordFragment_to_LoginFragment)
+                //Password change success message
+                Snackbar.make(view, "Password change successful!", BaseTransientBottomBar.LENGTH_SHORT).show()
+            //} else {
+                //Snackbar.make(view, "Passwords do not match. Please re-enter your password.", BaseTransientBottomBar.LENGTH_SHORT).show()
+            //}
+        }
+
+        binding.cancelPasswordButton.setOnClickListener {
             findNavController().navigate(R.id.action_ChangePasswordFragment_to_LoginFragment)
-            //Password change success message
-            Snackbar.make(view, "Password change successful!", BaseTransientBottomBar.LENGTH_SHORT).show()
         }
     }
 

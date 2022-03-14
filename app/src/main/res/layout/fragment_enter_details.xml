@@ -2,30 +2,31 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/frameLayout2"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.login.ChangePasswordFragment">
+    tools:context=".ui.login.EnterDetailsFragment">
 
     <ImageView
-        android:id="@+id/changePasswordImage"
+        android:id="@+id/enterDetailsImage"
         android:layout_width="200dp"
         android:layout_height="200dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:src="@drawable/ic_undraw_forgot_password_re_hxwm" />
+        android:src="@drawable/ic_undraw_mobile_user_re_xta4" />
 
     <TextView
-        android:id="@+id/changePasswordText"
+        android:id="@+id/enterDetailsText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:text="@string/title_change_password"
+        android:text="@string/title_enter_details"
         android:textAlignment="center"
         android:textSize="30sp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/changePasswordImage"/>
+        app:layout_constraintTop_toBottomOf="@id/enterDetailsImage"/>
 
     <RelativeLayout
         android:id="@+id/changePasswordButtonBox"
@@ -33,48 +34,32 @@
         android:layout_height="300dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/changePasswordText"
+        app:layout_constraintTop_toBottomOf="@+id/enterDetailsText"
         app:layout_constraintBottom_toBottomOf="parent" >
 
         <EditText
-            android:id="@+id/etSecurityCode"
+            android:id="@+id/etName"
             android:layout_width="250dp"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:hint="@string/security_code"
-            android:inputType="text"
+            android:hint="@string/name"
+            android:inputType="textPersonName"
             android:layout_alignParentTop="true" />
 
-        <EditText
-            android:id="@+id/etNewPassword"
+        <Spinner
+            android:id="@+id/gradeSpinner"
             android:layout_width="250dp"
             android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="@string/new_password"
-            android:inputType="textPassword"
-            android:layout_below="@+id/etSecurityCode" />
-
-        <EditText
-            android:id="@+id/etConfirmPassword"
-            android:layout_width="250dp"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="@string/confirm_password"
-            android:inputType="textPassword"
-            android:layout_below="@+id/etNewPassword" />
+            android:layout_margin="10dp"
+            android:spinnerMode="dialog"
+            android:entries="@array/grade"
+            android:layout_below="@+id/etName" />/>
 
         <Button
-            android:id="@+id/savePasswordButton"
+            android:id="@+id/saveDetailsButton"
             android:layout_width="250dp"
             android:layout_height="wrap_content"
             android:text="@string/save"
-            android:layout_above="@id/cancelPasswordButton"  />
-
-        <Button
-            android:id="@+id/cancelPasswordButton"
-            android:layout_width="250dp"
-            android:layout_height="wrap_content"
-            android:text="@string/cancel"
             android:layout_alignParentBottom="true"  />
 
     </RelativeLayout>

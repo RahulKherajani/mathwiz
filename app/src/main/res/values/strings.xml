@@ -9,12 +9,21 @@
     <string name="title_login">Login</string>
     <string name="title_change_password">Change Password</string>
     <string name="title_signup">Sign Up</string>
+    <string name="title_new_user">New User?</string>
+    <string name="title_want_signup">Want to Signup?</string>
+    <string name="title_enter_details">Enter Details</string>
+    <string name="title_activity_quiz">QuizActivity</string>
 
     <!-- Strings used for fragments for navigation -->
     <string name="next">Next</string>
     <string name="previous">Previous</string>
 
     <!-- Strings used for login/signup -->
+    <string name="welcome">Welcome to MathWiz!</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="no_returning">No, I have an account</string>
+    <string name="name">Name</string>
     <string name="email">Email</string>
     <string name="password">Password</string>
     <string name="new_password">New Password</string>
@@ -22,7 +31,13 @@
     <string name="security_code">Security Code</string>
     <string name="forgot_password">Forgot Password?</string>
     <string name="save">Save</string>
-    <string name="title_activity_quiz">QuizActivity</string>
+    <string name="cancel">Cancel</string>
+    <array name="grade">
+        <item>Grade Three</item>
+        <item>Grade Four</item>
+        <item>Grade Five</item>
+    </array>
+
     <!-- Strings used for fragments for navigation -->
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>

@@ -9,4 +9,5 @@
     <color name="white">#FFFFFFFF</color>
     <color name ="mathwiz_purple">#572384</color>
     <color name ="mathwiz_opaque_purple">#8235c4</color>
+    <color name ="mathwiz_grey">#DEDEDE</color>
 </resources>

@@ -10,19 +10,26 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MathWiz">
         <activity
-            android:name=".LoginActivity"
+            android:name=".QuizActivity"
             android:exported="false"
+            android:label="@string/title_activity_quiz"
+            android:theme="@style/Theme.MathWiz.NoActionBar" >
+        </activity>
+        <activity
+            android:name=".LoginActivity"
+            android:exported="true"
             android:label="@string/title_login"
-            android:theme="@style/Theme.MathWiz.NoActionBar" />
+            android:theme="@style/Theme.MathWiz.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".HomeActivity"
             android:exported="true"
             android:label="@string/title_activity_">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".MainActivity"

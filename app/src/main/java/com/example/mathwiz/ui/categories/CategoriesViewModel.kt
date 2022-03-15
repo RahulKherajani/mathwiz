@@ -7,7 +7,6 @@ import androidx.lifecycle.ViewModel
 class CategoriesViewModel : ViewModel() {
 
         private val _text = MutableLiveData<String>().apply {
-        value = "Card"
     }
     val text: LiveData<String> = _text
 }

@@ -17,17 +17,19 @@
         </activity>
         <activity
             android:name=".LoginActivity"
-            android:exported="false"
-            android:label="@string/title_login"
-            android:theme="@style/Theme.MathWiz.NoActionBar" />
-        <activity
-            android:name=".HomeActivity"
             android:exported="true"
-            android:label="@string/title_activity_">
+            android:label="@string/title_login"
+            android:theme="@style/Theme.MathWiz.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name=".HomeActivity"
+            android:exported="true"
+            android:label="@string/title_activity_">
+
         </activity>
         <activity
             android:name=".MainActivity"

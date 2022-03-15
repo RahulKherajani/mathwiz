@@ -3,7 +3,40 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/login_navigation.xml"
     xmlns:tools="http://schemas.android.com/tools"
-    app:startDestination="@id/navigation_login">
+    app:startDestination="@id/navigation_new_user">
+
+    <fragment
+        android:id="@+id/navigation_new_user"
+        android:name="com.example.mathwiz.ui.login.NewUserFragment"
+        android:label="@string/title_new_user"
+        tools:layout="@layout/fragment_new_user">
+        <action
+            android:id="@+id/action_NewUserFragment_to_LoginFragment"
+            app:destination="@id/navigation_login" />
+        <action
+            android:id="@+id/action_NewUserFragment_to_EnterDetailsFragment"
+            app:destination="@id/navigation_enter_details" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_enter_details"
+        android:name="com.example.mathwiz.ui.login.EnterDetailsFragment"
+        android:label="@string/title_enter_details"
+        tools:layout="@layout/fragment_enter_details">
+        <action
+            android:id="@+id/action_EnterDetailsFragment_to_WantSignupFragment"
+            app:destination="@id/navigation_want_signup" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_want_signup"
+        android:name="com.example.mathwiz.ui.login.WantSignupFragment"
+        android:label="@string/title_want_signup"
+        tools:layout="@layout/fragment_want_signup">
+        <action
+            android:id="@+id/action_WantSignup_to_SignupFragment"
+            app:destination="@id/navigation_signup" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_login"

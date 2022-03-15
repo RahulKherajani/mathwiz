@@ -1,17 +1,18 @@
 package com.example.mathwiz.ui.login
 
 import android.content.Intent
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.text.TextUtils
+import android.util.Patterns
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.mathwiz.HomeActivity
 import com.example.mathwiz.R
 import com.example.mathwiz.databinding.FragmentLoginBinding
-import com.example.mathwiz.databinding.FragmentQuizDescriptionBinding
+
 
 class LoginFragment : Fragment() {
 

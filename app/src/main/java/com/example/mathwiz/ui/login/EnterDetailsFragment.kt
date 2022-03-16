@@ -1,22 +1,21 @@
 package com.example.mathwiz.ui.login
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
+import com.example.mathwiz.HomeActivity
+import com.example.mathwiz.MathWiz
 import com.example.mathwiz.R
 import com.example.mathwiz.databinding.FragmentEnterDetailsBinding
-import com.example.mathwiz.databinding.FragmentSignupBinding
 import com.google.android.material.snackbar.BaseTransientBottomBar
 import com.google.android.material.snackbar.Snackbar
 
 class EnterDetailsFragment : Fragment() {
     private var _binding: FragmentEnterDetailsBinding? = null
-
-    // This property is only valid between onCreateView and
-    // onDestroyView.
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -32,8 +31,20 @@ class EnterDetailsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.saveDetailsButton.setOnClickListener {
-            findNavController().navigate(R.id.action_EnterDetailsFragment_to_WantSignupFragment)
+            //Save the name and grade to the preferences file
+            MathWiz.userData?.name = binding.etName.text.toString()
+            MathWiz.userData?.grade = binding.gradeSpinner.selectedItem.toString()
+
             Snackbar.make(view, "Details saved!", BaseTransientBottomBar.LENGTH_SHORT).show()
+            if(MathWiz.userData?.email == ""){
+                //Proceed to 'Want to Signup?' page
+                findNavController().navigate(R.id.action_EnterDetailsFragment_to_WantSignupFragment)
+            } else {
+                val intent = Intent(this.context, HomeActivity::class.java).apply {
+                }
+                startActivity(intent)
+            }
+
         }
 
     }

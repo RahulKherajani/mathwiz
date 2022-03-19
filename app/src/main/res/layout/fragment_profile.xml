@@ -55,13 +55,15 @@
                     android:enabled="false"
                     android:text="username" />
 
-                <EditText
+
+                <Spinner
                     android:id="@+id/profile_grade"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:ems="10"
-                    android:enabled="false"
-                    android:inputType="number" />
+                    android:layout_margin="10dp"
+                    android:spinnerMode="dialog"
+                    android:entries="@array/grade"
+                    android:layout_below="@+id/profile_name" />
 
                 <EditText
                     android:id="@+id/profile_email"

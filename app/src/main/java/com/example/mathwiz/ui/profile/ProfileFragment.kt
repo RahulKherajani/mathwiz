@@ -9,7 +9,9 @@ import android.view.ViewGroup
 import android.widget.Button
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.example.mathwiz.LoginActivity
+import com.example.mathwiz.MathWiz
 import com.example.mathwiz.R
 import com.example.mathwiz.databinding.FragmentProfileBinding
 import java.io.*
@@ -50,12 +52,22 @@ class ProfileFragment : Fragment(), View.OnClickListener {
             R.id.edit_button -> {
                 _binding!!.profileEmail.isEnabled = !_binding!!.profileEmail.isEnabled
                 _binding!!.profileName.isEnabled = !_binding!!.profileName.isEnabled
-                _binding!!.profileGrade.isEnabled = !_binding!!.profileGrade.isEnabled
+                _binding!!.profileGrade.setEnabled(!_binding!!.profileGrade.isEnabled)
                 if(inEditing){
+
+                    saveProfile(_binding!!.profileName.text.toString(),_binding!!.profileGrade.selectedItem.toString(),
+                            _binding!!.profileEmail.text.toString())
                     _binding!!.editButton.setText("Edit Profile")
+
+                    if(MathWiz.userData?.name == null){
+                        _binding!!.signOrLogoutButton.setText("Sign Up")
+                    }else{
+                        _binding!!.signOrLogoutButton.setText("Logout")
+                    }
                 }else{
                     Log.e("ProfileFragment", "Edit Profile")
                     _binding!!.editButton.setText("Save")
+                    _binding!!.signOrLogoutButton.setText("Cancel")
                 }
                 // finally, change not in editing
                 inEditing = !inEditing
@@ -67,24 +79,41 @@ class ProfileFragment : Fragment(), View.OnClickListener {
                 }else{
                     Log.e("ProfileFragment","Sign Up or Logout")
 
-                    val login : Boolean = true
-                    if (login) {
+                    // already login, clear user info
+                    if (MathWiz.userData?.name != null) {
                         Log.e("ProfileFragment","Have Login")
+                        clearUserInfo()
+                        // goto login page
                         activity?.let {
                             val intent = Intent(it,LoginActivity::class.java)
                             it.startActivity(intent)
                         }
                     }else{
-                        // todo change login to sign up
+                        // not login,go to sign up page
                         activity?.let {
                             val intent = Intent(it,LoginActivity::class.java)
                             it.startActivity(intent)
+
                         }
                     }
                 }
             }
             else -> {
             }
+        }
+    }
+
+    private fun clearUserInfo() {
+        MathWiz.userData?.name = null
+        MathWiz.userData?.grade = null
+        MathWiz.userData?.email = null
+    }
+
+    private fun saveProfile(name :String, grade : String, email : String?){
+        MathWiz.userData?.name = name
+        MathWiz.userData?.grade = grade
+        if(email != null){
+            MathWiz.userData?.email = email
         }
     }
 
@@ -98,65 +127,28 @@ class ProfileFragment : Fragment(), View.OnClickListener {
      * init profile data from file
      */
     private fun initProfileData(){
-        _binding!!.profileName.setText("Raft")
-        _binding!!.profileGrade.setText("90")
-        _binding!!.profileEmail.setText("sample@gmail.com")
-    }
-
-
-    /**
-     * first line: username
-     * second line:  grade
-     * third line: email
-     */
-    private fun readProfileDataFromFile() {
-        var reader : FileReader? = null
-        try{
-            reader = FileReader(PROFILE_FILE_NAME)
-            var lines = reader.readLines()
-            if(lines.count() == 3){
-                _binding!!.profileName.setText(lines[0])
-                _binding!!.profileGrade.setText(lines[1])
-                _binding!!.profileEmail.setText(lines[2])
-            }
-        }catch (e :Exception){
-            Log.e("ProfileFragment",e.stackTraceToString())
-        }finally {
-            reader?.close()
+        _binding!!.profileGrade.setEnabled(false)
+        _binding!!.profileName.setText(MathWiz.userData?.name)
+        _binding!!.profileGrade.setSelection(getIndexOfGrade(MathWiz.userData?.grade))
+        if(MathWiz.userData?.email != null){
+            _binding!!.profileEmail.setText(MathWiz.userData?.email)
         }
-    }
-
-    /**
-     * write profile data into internal file
-     * first line: username
-     * second line:  grade
-     * third line: email
-     */
-    private fun writeProfileDataToFile(name :String,grade : String, email : String){
-        var writer : FileWriter? = null
-        try{
-            writer = FileWriter(PROFILE_FILE_NAME,false)
-            writer.write(name + "\n");
-            writer.write(grade + "\n");
-            writer.write(email + "\n");
-        }catch (e :Exception){
-            Log.e("ProfileFragment",e.stackTraceToString())
-        }finally {
-            writer?.close()
+        // already login
+        if (MathWiz.userData?.name != null){
+            _binding!!.signOrLogoutButton.setText("Logout")
         }
+        inEditing = false
+
     }
 
-
+    private fun getIndexOfGrade(grade : String?) : Int {
+        if ("Grade Three".equals(grade,true)){
+            return 0;
+        }else if("Grade Four".equals(grade, true)){
+            return 1;
+        }
+        return 2;
+    }
+    
 }
 
-class Profile{
-    var name : String
-    var grade : Int
-    var email : String
-
-    constructor(name: String, grade: Int, email: String) {
-        this.name = name
-        this.grade = grade
-        this.email = email
-    }
-}

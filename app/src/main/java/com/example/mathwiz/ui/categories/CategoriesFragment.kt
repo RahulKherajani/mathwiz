@@ -1,6 +1,7 @@
 package com.example.mathwiz.ui.categories
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,9 +10,12 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.mathwiz.MathWiz
 import com.example.mathwiz.adapters.categories.CategoryAdapter
 import com.example.mathwiz.databinding.FragmentCategoriesBinding
 import com.example.mathwiz.models.categories.CategoryModel
+import com.google.firebase.firestore.FirebaseFirestore
+
 
 class CategoriesFragment : Fragment() {
 
@@ -22,8 +26,10 @@ class CategoriesFragment : Fragment() {
     private val binding get() = _binding!!
     private var recyclerView: RecyclerView? = null
     private var category: ArrayList<CategoryModel>? = null
+    private var filteredCategory: ArrayList<CategoryModel>? = null
     private var gridLayoutManager: GridLayoutManager? = null
     private var categoryAdapter: CategoryAdapter? = null
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -47,31 +53,49 @@ class CategoriesFragment : Fragment() {
 
         category = ArrayList()
         category = setCategories()
-        categoryAdapter = activity?.let { CategoryAdapter(it, category!!) }
+        filteredCategory = setCategories()
+        categoryAdapter = activity?.let { CategoryAdapter(it, filteredCategory!!) }
         recyclerView?.adapter = categoryAdapter
 
+        binding.btnSearch.setOnClickListener {
+            filteredCategory?.clear()
+            val searchText = binding.etSearchCategory.text.toString().lowercase()
+            if(searchText.isNotBlank()){
+                category?.forEach {
+                    if(it.text.lowercase().contains(searchText)){
+                        filteredCategory?.add(it)
+                    }
+                }
+                recyclerView?.adapter?.notifyDataSetChanged()
+            } else {
+                filteredCategory?.clear()
+                category?.let { filteredCategory?.addAll(it) }
+                recyclerView?.adapter?.notifyDataSetChanged()
+            }
+        }
         return root
     }
 
     private fun setCategories(): ArrayList<CategoryModel> {
-
-        var arrayList: ArrayList<CategoryModel> = ArrayList()
-
-        arrayList.add(CategoryModel("Category A"))
-        arrayList.add(CategoryModel( "Category B"))
-        arrayList.add(CategoryModel( "Category C"))
-        arrayList.add(CategoryModel( "Category D"))
-        arrayList.add(CategoryModel( "Category E"))
-        arrayList.add(CategoryModel( "Category G"))
-        arrayList.add(CategoryModel( "Category H"))
-        arrayList.add(CategoryModel( "Category I"))
-        arrayList.add(CategoryModel( "Category J"))
-        arrayList.add(CategoryModel( "Category K"))
-        arrayList.add(CategoryModel( "Category L"))
-        arrayList.add(CategoryModel( "Category M"))
-        arrayList.add(CategoryModel( "Category N"))
-
-
+        val db = FirebaseFirestore.getInstance()
+        val arrayList: ArrayList<CategoryModel> = ArrayList()
+        val grade = MathWiz.userData?.grade
+        db.collection("categories").document(grade.toString()).get().addOnCompleteListener{ task ->
+            if (task.isSuccessful) {
+            val document = task.result
+            if (document != null) {
+                val count = document.getLong("count")
+                for (i in 1..count!!){
+                    val categoryName = document.getString("category$i")
+                    arrayList.add(CategoryModel(categoryName.toString()))
+                    recyclerView?.adapter?.notifyDataSetChanged()
+                }
+            } else {
+                Log.d("TAG", "No such document")
+            }
+        } else {
+            Log.d("TAG", "Error ", task.exception)
+        }}
         return arrayList
     }
 

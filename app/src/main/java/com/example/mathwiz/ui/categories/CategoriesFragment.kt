@@ -86,8 +86,7 @@ class CategoriesFragment : Fragment() {
             if (document != null) {
                 val count = document.getLong("count")
                 for (i in 1..count!!){
-                    val categoryName = document.getString("category$i")
-                    arrayList.add(CategoryModel(categoryName.toString()))
+                    arrayList.add(CategoryModel(document.getString("category$i").toString()))
                     recyclerView?.adapter?.notifyDataSetChanged()
                 }
             } else {

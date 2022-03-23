@@ -14,6 +14,8 @@ import com.example.mathwiz.LoginActivity
 import com.example.mathwiz.MathWiz
 import com.example.mathwiz.R
 import com.example.mathwiz.databinding.FragmentProfileBinding
+import com.google.android.material.snackbar.BaseTransientBottomBar
+import com.google.android.material.snackbar.Snackbar
 import java.io.*
 import java.lang.Exception
 
@@ -50,27 +52,36 @@ class ProfileFragment : Fragment(), View.OnClickListener {
         val layout : ConstraintLayout? = activity?.findViewById(R.id.container)
         when (v?.id) {
             R.id.edit_button -> {
-                _binding!!.profileEmail.isEnabled = !_binding!!.profileEmail.isEnabled
-                _binding!!.profileName.isEnabled = !_binding!!.profileName.isEnabled
-                _binding!!.profileGrade.setEnabled(!_binding!!.profileGrade.isEnabled)
-                if(inEditing){
 
-                    saveProfile(_binding!!.profileName.text.toString(),_binding!!.profileGrade.selectedItem.toString(),
-                            _binding!!.profileEmail.text.toString())
-                    _binding!!.editButton.setText("Edit Profile")
+                //Verify that the email is in the correct format
+                var email = _binding!!.profileEmail.text.toString()
+                if(!android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()){
+                    Snackbar.make(v, "Invalid email address. Please re-enter.", BaseTransientBottomBar.LENGTH_SHORT).show()
+                } else {
 
-                    if(MathWiz.userData?.name == null){
-                        _binding!!.signOrLogoutButton.setText("Sign Up")
+                    _binding!!.profileEmail.isEnabled = !_binding!!.profileEmail.isEnabled
+                    _binding!!.profileName.isEnabled = !_binding!!.profileName.isEnabled
+                    _binding!!.profileGrade.setEnabled(!_binding!!.profileGrade.isEnabled)
+
+                    if(inEditing){
+                        saveProfile(_binding!!.profileName.text.toString(),_binding!!.profileGrade.selectedItem.toString(), _binding!!.profileEmail.text.toString())
+                        _binding!!.editButton.setText("Edit Profile")
+
+                        if(MathWiz.userData?.name == null){
+                            _binding!!.signOrLogoutButton.setText("Sign Up")
+                        }else{
+                            _binding!!.signOrLogoutButton.setText("Logout")
+                        }
+
                     }else{
-                        _binding!!.signOrLogoutButton.setText("Logout")
+                        Log.e("ProfileFragment", "Edit Profile")
+                        _binding!!.editButton.setText("Save")
+                        _binding!!.signOrLogoutButton.setText("Cancel")
                     }
-                }else{
-                    Log.e("ProfileFragment", "Edit Profile")
-                    _binding!!.editButton.setText("Save")
-                    _binding!!.signOrLogoutButton.setText("Cancel")
+
+                    // finally, change not in editing
+                    inEditing = !inEditing
                 }
-                // finally, change not in editing
-                inEditing = !inEditing
             }
             R.id.sign_or_logout_button ->{
                 // todo navigate to sign up or logout
@@ -97,8 +108,6 @@ class ProfileFragment : Fragment(), View.OnClickListener {
                         }
                     }
                 }
-            }
-            else -> {
             }
         }
     }

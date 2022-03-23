@@ -56,6 +56,9 @@ class LoginFragment : Fragment() {
 
                 //TODO - get user info from cloud
 
+                //Save the email locally
+                MathWiz.userData?.email = email
+
                 //Proceed to Home
                 Snackbar.make(view, "Sign up successful!", BaseTransientBottomBar.LENGTH_SHORT).show()
                 val intent = Intent(this.context, HomeActivity::class.java).apply {

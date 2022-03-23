@@ -31,20 +31,26 @@ class EnterDetailsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.saveDetailsButton.setOnClickListener {
-            //Save the name and grade to the preferences file
-            MathWiz.userData?.name = binding.etName.text.toString()
-            MathWiz.userData?.grade = binding.gradeSpinner.selectedItem.toString()
 
-            Snackbar.make(view, "Details saved!", BaseTransientBottomBar.LENGTH_SHORT).show()
-            if(MathWiz.userData?.email == ""){
-                //Proceed to 'Want to Signup?' page
-                findNavController().navigate(R.id.action_EnterDetailsFragment_to_WantSignupFragment)
+            var name = binding.etName.text.toString()
+
+            if(name == ""){
+                Snackbar.make(view, "Please fill all fields before continuing.", BaseTransientBottomBar.LENGTH_SHORT).show()
             } else {
-                val intent = Intent(this.context, HomeActivity::class.java).apply {
-                }
-                startActivity(intent)
-            }
+                //Save the name and grade to the preferences file
+                MathWiz.userData?.name = name
+                MathWiz.userData?.grade = binding.gradeSpinner.selectedItem.toString()
 
+                Snackbar.make(view, "Details saved!", BaseTransientBottomBar.LENGTH_SHORT).show()
+                if(MathWiz.userData?.email == ""){
+                    //Proceed to 'Want to Signup?' page
+                    findNavController().navigate(R.id.action_EnterDetailsFragment_to_WantSignupFragment)
+                } else {
+                    val intent = Intent(this.context, HomeActivity::class.java).apply {
+                    }
+                    startActivity(intent)
+                }
+            }
         }
 
     }

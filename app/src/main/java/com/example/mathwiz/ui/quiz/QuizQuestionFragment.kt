@@ -196,6 +196,7 @@ class QuizQuestionFragment : Fragment(), View.OnClickListener {
         for (option in options) {
             option.typeface = Typeface.DEFAULT
             option.setBackgroundResource(R.drawable.ic_quiz_option)
+            option.isClickable = true
         }
     }
 
@@ -218,6 +219,10 @@ class QuizQuestionFragment : Fragment(), View.OnClickListener {
     }
 
     private fun answerViewCorrect(answer: Int) {
+        binding.option1.isClickable = false
+        binding.option2.isClickable = false
+        binding.option3.isClickable = false
+        binding.option4.isClickable = false
         when (answer) {
             1 -> {
                 binding.option1.setBackgroundResource(R.drawable.ic_quiz_option_correct)
@@ -230,6 +235,7 @@ class QuizQuestionFragment : Fragment(), View.OnClickListener {
             }
             4 -> {
                 binding.option4.setBackgroundResource(R.drawable.ic_quiz_option_correct)
+
             }
         }
     }

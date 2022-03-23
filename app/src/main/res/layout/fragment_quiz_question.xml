@@ -31,49 +31,71 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
+    <TextView
         android:id="@+id/option1"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_margin="30dp"
         android:layout_marginTop="116dp"
         android:text="50"
+        android:textColor="@color/white"
+        android:textAlignment="center"
+        android:padding="5dp"
+        android:background="@drawable/ic_quiz_option"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/questionBox" />
+        app:layout_constraintTop_toBottomOf="@+id/questionBox"/>
 
-    <Button
+
+    <TextView
         android:id="@+id/option2"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_margin="15dp"
         android:text="45"
+        android:textColor="@color/white"
+        android:textAlignment="center"
+        android:padding="5dp"
+        android:background="@drawable/ic_quiz_option"
         android:layout_marginTop="48dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/option1" />
+        app:layout_constraintTop_toBottomOf="@+id/option1"/>
 
-    <Button
+
+
+    <TextView
         android:id="@+id/option3"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_margin="15dp"
         android:text="47"
+        android:textColor="@color/white"
+        android:textAlignment="center"
+        android:padding="5dp"
+        android:background="@drawable/ic_quiz_option"
         android:layout_marginTop="48dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/option2" />
+        app:layout_constraintTop_toBottomOf="@+id/option2"/>
 
-    <Button
+
+
+    <TextView
         android:id="@+id/option4"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_margin="15dp"
         android:layout_marginTop="48dp"
         android:text="55"
+        android:textColor="@color/white"
+        android:textAlignment="center"
+        android:padding="5dp"
+        android:background="@drawable/ic_quiz_option"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/option3" />
+        app:layout_constraintTop_toBottomOf="@+id/option3"/>
+
 
     <Button
         android:id="@+id/submitQuestionButton"

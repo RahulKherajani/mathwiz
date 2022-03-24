@@ -27,7 +27,7 @@ class NewUserFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        //If personal details have already been entered, proceed to the login page
+        //If personal details have already been entered, proceed to home
         if(MathWiz.userData?.name != ""){
             val intent = Intent(this.context, HomeActivity::class.java).apply {
             }

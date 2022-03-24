@@ -13,7 +13,10 @@ import androidx.navigation.fragment.findNavController
 import com.example.mathwiz.LoginActivity
 import com.example.mathwiz.MathWiz
 import com.example.mathwiz.R
+import com.example.mathwiz.auth
 import com.example.mathwiz.databinding.FragmentProfileBinding
+import com.google.android.material.snackbar.BaseTransientBottomBar
+import com.google.android.material.snackbar.Snackbar
 import java.io.*
 import java.lang.Exception
 
@@ -50,27 +53,36 @@ class ProfileFragment : Fragment(), View.OnClickListener {
         val layout : ConstraintLayout? = activity?.findViewById(R.id.container)
         when (v?.id) {
             R.id.edit_button -> {
-                _binding!!.profileEmail.isEnabled = !_binding!!.profileEmail.isEnabled
-                _binding!!.profileName.isEnabled = !_binding!!.profileName.isEnabled
-                _binding!!.profileGrade.setEnabled(!_binding!!.profileGrade.isEnabled)
-                if(inEditing){
 
-                    saveProfile(_binding!!.profileName.text.toString(),_binding!!.profileGrade.selectedItem.toString(),
-                            _binding!!.profileEmail.text.toString())
-                    _binding!!.editButton.setText("Edit Profile")
+                //Verify that the email is in the correct format
+                var email = _binding!!.profileEmail.text.toString()
+                if(!android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()){
+                    Snackbar.make(v, "Invalid email address. Please re-enter.", BaseTransientBottomBar.LENGTH_SHORT).show()
+                } else {
 
-                    if(MathWiz.userData?.name == null){
-                        _binding!!.signOrLogoutButton.setText("Sign Up")
+                    //_binding!!.profileEmail.isEnabled = !_binding!!.profileEmail.isEnabled
+                    _binding!!.profileName.isEnabled = !_binding!!.profileName.isEnabled
+                    _binding!!.profileGrade.setEnabled(!_binding!!.profileGrade.isEnabled)
+
+                    if(inEditing){
+                        saveProfile(_binding!!.profileName.text.toString(),_binding!!.profileGrade.selectedItem.toString(), _binding!!.profileEmail.text.toString())
+                        _binding!!.editButton.setText("Edit Profile")
+
+                        if(MathWiz.userData?.name == ""){
+                            _binding!!.signOrLogoutButton.setText("Sign Up")
+                        }else{
+                            _binding!!.signOrLogoutButton.setText("Logout")
+                        }
+
                     }else{
-                        _binding!!.signOrLogoutButton.setText("Logout")
+                        Log.e("ProfileFragment", "Edit Profile")
+                        _binding!!.editButton.setText("Save")
+                        _binding!!.signOrLogoutButton.setText("Cancel")
                     }
-                }else{
-                    Log.e("ProfileFragment", "Edit Profile")
-                    _binding!!.editButton.setText("Save")
-                    _binding!!.signOrLogoutButton.setText("Cancel")
+
+                    // finally, change not in editing
+                    inEditing = !inEditing
                 }
-                // finally, change not in editing
-                inEditing = !inEditing
             }
             R.id.sign_or_logout_button ->{
                 // todo navigate to sign up or logout
@@ -79,40 +91,32 @@ class ProfileFragment : Fragment(), View.OnClickListener {
                 }else{
                     Log.e("ProfileFragment","Sign Up or Logout")
 
-                    // already login, clear user info
-                    if (MathWiz.userData?.name != null) {
-                        Log.e("ProfileFragment","Have Login")
-                        clearUserInfo()
-                        // goto login page
-                        activity?.let {
-                            val intent = Intent(it,LoginActivity::class.java)
-                            it.startActivity(intent)
-                        }
-                    }else{
-                        // not login,go to sign up page
-                        activity?.let {
-                            val intent = Intent(it,LoginActivity::class.java)
-                            it.startActivity(intent)
+                    clearUserInfo()
 
-                        }
+                    if(MathWiz.userData?.email != ""){
+                        auth.signOut()
+                    }
+
+                    // goto new user page
+                    activity?.let {
+                        val intent = Intent(it, LoginActivity::class.java)
+                        it.startActivity(intent)
                     }
                 }
-            }
-            else -> {
             }
         }
     }
 
     private fun clearUserInfo() {
-        MathWiz.userData?.name = null
-        MathWiz.userData?.grade = null
-        MathWiz.userData?.email = null
+        MathWiz.userData?.name = ""
+        MathWiz.userData?.grade = ""
+        MathWiz.userData?.email = ""
     }
 
     private fun saveProfile(name :String, grade : String, email : String?){
         MathWiz.userData?.name = name
         MathWiz.userData?.grade = grade
-        if(email != null){
+        if(email != ""){
             MathWiz.userData?.email = email
         }
     }
@@ -130,11 +134,11 @@ class ProfileFragment : Fragment(), View.OnClickListener {
         _binding!!.profileGrade.setEnabled(false)
         _binding!!.profileName.setText(MathWiz.userData?.name)
         _binding!!.profileGrade.setSelection(getIndexOfGrade(MathWiz.userData?.grade))
-        if(MathWiz.userData?.email != null){
+        if(MathWiz.userData?.email != ""){
             _binding!!.profileEmail.setText(MathWiz.userData?.email)
         }
         // already login
-        if (MathWiz.userData?.name != null){
+        if (MathWiz.userData?.email != ""){
             _binding!!.signOrLogoutButton.setText("Logout")
         }
         inEditing = false

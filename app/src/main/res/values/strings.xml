@@ -32,6 +32,8 @@
     <string name="forgot_password">Forgot Password?</string>
     <string name="save">Save</string>
     <string name="cancel">Cancel</string>
+    <string name="send">Send Reset Email</string>
+    <string name="back">Back</string>
     <array name="grade">
         <item>Grade Three</item>
         <item>Grade Four</item>

@@ -7,10 +7,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import com.example.mathwiz.HomeActivity
 import com.example.mathwiz.MathWiz
 import com.example.mathwiz.R
+import com.example.mathwiz.auth
 import com.example.mathwiz.databinding.FragmentSignupBinding
 import com.google.android.material.snackbar.BaseTransientBottomBar
 import com.google.android.material.snackbar.Snackbar
@@ -51,20 +53,27 @@ class SignupFragment : Fragment() {
                 Snackbar.make(view, "Passwords do not match. Please re-enter.", BaseTransientBottomBar.LENGTH_SHORT).show()
             } else {
 
-                //TODO - save to cloud
+                //Attempt sign up
+                auth.createUserWithEmailAndPassword(email,password).addOnCompleteListener { task ->
+                    if(task.isSuccessful){
+                        //Save the email locally
+                        MathWiz.userData?.email = email
 
-                //Save the email locally
-                MathWiz.userData?.email = email
-
-                Snackbar.make(view, "Sign up successful!", BaseTransientBottomBar.LENGTH_SHORT).show()
-                if(MathWiz.userData?.name == ""){
-                    findNavController().navigate(R.id.action_SignupFragment_to_EnterDetailsFragment)
-                } else {
-                    //Proceed to Home
-                    val intent = Intent(this.context, HomeActivity::class.java).apply {
+                        Snackbar.make(view, "Sign up successful!", BaseTransientBottomBar.LENGTH_SHORT).show()
+                        if(MathWiz.userData?.name == ""){
+                            findNavController().navigate(R.id.action_SignupFragment_to_EnterDetailsFragment)
+                        } else {
+                            //Proceed to Home
+                            val intent = Intent(this.context, HomeActivity::class.java).apply {
+                            }
+                            startActivity(intent)
+                        }
                     }
-                    startActivity(intent)
+                }.addOnFailureListener { exception ->
+                    Snackbar.make(view,exception.localizedMessage,BaseTransientBottomBar.LENGTH_SHORT).show()
                 }
+
+
             }
         }
 

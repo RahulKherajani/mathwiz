@@ -12,6 +12,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.mathwiz.HomeActivity
 import com.example.mathwiz.MathWiz
 import com.example.mathwiz.R
+import com.example.mathwiz.auth
 import com.example.mathwiz.databinding.FragmentLoginBinding
 import com.google.android.material.snackbar.BaseTransientBottomBar
 import com.google.android.material.snackbar.Snackbar
@@ -47,23 +48,27 @@ class LoginFragment : Fragment() {
             else if(!android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
                 Snackbar.make(view, "Invalid email address. Please re-enter.", BaseTransientBottomBar.LENGTH_SHORT).show()
             }
-            //TODO - If the email/password does not match the database
-            //else if(){
-            //    Snackbar.make(view, "Incorrect email or password.", BaseTransientBottomBar.LENGTH_SHORT).show()
-            //}
-            // Otherwise, success
             else {
 
-                //TODO - get user info from cloud
+                //Attempt login
+                auth.signInWithEmailAndPassword(email,password).addOnCompleteListener { task ->
+                    if(task.isSuccessful){
+                        //Save the email locally
+                        MathWiz.userData?.email = email
 
-                //Save the email locally
-                MathWiz.userData?.email = email
-
-                //Proceed to Home
-                Snackbar.make(view, "Sign up successful!", BaseTransientBottomBar.LENGTH_SHORT).show()
-                val intent = Intent(this.context, HomeActivity::class.java).apply {
+                        if(MathWiz.userData?.name == ""){
+                            findNavController().navigate(R.id.action_LoginFragment_to_EnterDetailsFragment)
+                        } else {
+                            //Proceed to Home
+                            Snackbar.make(view, "Sign up successful!", BaseTransientBottomBar.LENGTH_SHORT).show()
+                            val intent = Intent(this.context, HomeActivity::class.java).apply {
+                            }
+                            startActivity(intent)
+                        }
+                    }
+                }.addOnFailureListener { exception ->
+                    Snackbar.make(view,exception.localizedMessage,BaseTransientBottomBar.LENGTH_SHORT).show()
                 }
-                startActivity(intent)
             }
         }
         binding.forgotPasswordButton.setOnClickListener {

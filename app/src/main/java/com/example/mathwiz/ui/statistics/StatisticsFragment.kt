@@ -40,20 +40,19 @@ class StatisticsFragment : Fragment() {
 
         val db = FirebaseFirestore.getInstance()
         val categoryNames: ArrayList<String> = ArrayList()
+        val userId = MathWiz.userData?.id
         val grade = MathWiz.userData?.grade
-        val name = MathWiz.userData?.name
         val spinner = binding.categoriesSpinner
         val pieChart = binding.statsProgressbar
         val pieChartText = binding.pieChartText
-
         db.collection("categories").document(grade.toString()).get().addOnCompleteListener{ task ->
             if (task.isSuccessful) {
                 val document = task.result
                 if (document != null) {
                     val count = document.getLong("count")
                     for (i in 1..count!!){
-                        val categoryName = document.getString("category$i")
-                        categoryNames.add(categoryName.toString())
+                        val category = document["category$i"] as List<*>
+                        categoryNames.add(category[0] as String)
                     }
                     spinner.adapter = activity?.applicationContext?.let { ArrayAdapter(it, R.layout.simple_spinner_item, categoryNames) } as SpinnerAdapter
                 } else {
@@ -71,14 +70,19 @@ class StatisticsFragment : Fragment() {
                 position: Int,
                 id: Long
             ) {
-                db.collection("users").document(name.toString()).collection("statistics").document(categoryNames[position]).get().addOnCompleteListener{ task ->
+                db.collection("users").document(userId.toString()).collection("statistics").document(categoryNames[position]).get().addOnCompleteListener{ task ->
                     if (task.isSuccessful) {
                         val document = task.result
                         if (document != null) {
                             val correct = document.getDouble("correct")
                             val total = document.getDouble("total")
-                            pieChart.progress =  ((correct!! / total !!) * 100).toInt()
-                            pieChartText.text = "$correct / $total"
+                            if (total != 0.0){
+                                pieChart.progress =  ((correct!! / total !!) * 100).toInt()
+                            }
+                            else{
+                                pieChart.progress =  0
+                            }
+                            pieChartText.text = "${correct?.toInt()} / ${total.toInt()}"
                         } else {
                             Log.d("TAG", "No such document")
                         }

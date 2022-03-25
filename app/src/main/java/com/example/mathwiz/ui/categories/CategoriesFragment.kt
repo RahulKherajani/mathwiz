@@ -1,5 +1,6 @@
 package com.example.mathwiz.ui.categories
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -62,7 +63,7 @@ class CategoriesFragment : Fragment() {
             val searchText = binding.etSearchCategory.text.toString().lowercase()
             if(searchText.isNotBlank()){
                 category?.forEach {
-                    if(it.text.lowercase().contains(searchText)){
+                    if(it.categoryName.lowercase().contains(searchText)){
                         filteredCategory?.add(it)
                     }
                 }
@@ -76,6 +77,7 @@ class CategoriesFragment : Fragment() {
         return root
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     private fun setCategories(): ArrayList<CategoryModel> {
         val db = FirebaseFirestore.getInstance()
         val arrayList: ArrayList<CategoryModel> = ArrayList()
@@ -86,7 +88,8 @@ class CategoriesFragment : Fragment() {
             if (document != null) {
                 val count = document.getLong("count")
                 for (i in 1..count!!){
-                    arrayList.add(CategoryModel(document.getString("category$i").toString()))
+                    val category = document["category$i"] as List<*>
+                    arrayList.add(CategoryModel(category[0] as String, category[1] as String))
                     recyclerView?.adapter?.notifyDataSetChanged()
                 }
             } else {

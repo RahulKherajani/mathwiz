@@ -12,7 +12,7 @@ import com.example.mathwiz.QuizActivity
 import com.example.mathwiz.R
 import com.example.mathwiz.models.categories.CategoryModel
 
-class CategoryAdapter(var context: Context, var arrayList: ArrayList<CategoryModel>) :
+class CategoryAdapter(var context: Context, private var arrayList: ArrayList<CategoryModel>) :
     RecyclerView.Adapter<CategoryAdapter.ItemHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemHolder {
         val viewHolder = LayoutInflater.from(parent.context)
@@ -26,20 +26,22 @@ class CategoryAdapter(var context: Context, var arrayList: ArrayList<CategoryMod
 
     override fun onBindViewHolder(holder: ItemHolder, position: Int) {
 
-        val category: CategoryModel = arrayList.get(position)
+        val category: CategoryModel = arrayList[position]
 
-        holder.categoryName.text = category.text
+        holder.categoryName.text = category.categoryName
 
         holder.cardCategory.setOnClickListener {
             val intent = Intent(context, QuizActivity::class.java)
-            context.startActivity(intent);
+            intent.putExtra("categoryName", category.categoryName)
+            intent.putExtra("categoryDescription", category.categoryDescription)
+            context.startActivity(intent)
         }
 
     }
 
     class ItemHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-        var categoryName = itemView.findViewById<TextView>(R.id.title_text_view)
+        var categoryName: TextView = itemView.findViewById<TextView>(R.id.title_text_view)
         var cardCategory = itemView.findViewById<CardView>(R.id.cardCategory)
     }
 }

@@ -14,7 +14,9 @@ import com.example.mathwiz.*
 import com.example.mathwiz.databinding.FragmentSignupBinding
 import com.google.android.material.snackbar.BaseTransientBottomBar
 import com.google.android.material.snackbar.Snackbar
+import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.DocumentReference
+import com.google.firebase.firestore.WriteBatch
 
 class SignupFragment : Fragment() {
 
@@ -35,9 +37,9 @@ class SignupFragment : Fragment() {
 
         binding.savePasswordButton.setOnClickListener {
 
-            var email = binding.etSignupEmail.text.toString()
-            var password = binding.etNewPassword.text.toString()
-            var confirmPassword = binding.etConfirmPassword.text.toString()
+            val email = binding.etSignupEmail.text.toString()
+            val password = binding.etNewPassword.text.toString()
+            val confirmPassword = binding.etConfirmPassword.text.toString()
 
             //If any of the fields are empty
             if(TextUtils.isEmpty(email) || TextUtils.isEmpty(confirmPassword) || TextUtils.isEmpty(password)){
@@ -51,26 +53,47 @@ class SignupFragment : Fragment() {
                 Snackbar.make(view, "Password must be greater than 6 characters.", BaseTransientBottomBar.LENGTH_SHORT).show()
             }
             //If the passwords do not match
-            else if(!password.equals(confirmPassword)){
+            else if(password != confirmPassword){
                 Snackbar.make(view, "Passwords do not match. Please re-enter.", BaseTransientBottomBar.LENGTH_SHORT).show()
             } else {
 
                 //Attempt sign up
                 auth.createUserWithEmailAndPassword(email,password).addOnCompleteListener { task ->
                     if(task.isSuccessful){
-                        //Save the email locally
+                        //Save User Data Locally
                         MathWiz.userData?.email = email
+                        val name = MathWiz.userData?.name
+                        val grade = MathWiz.userData?.grade
 
                         //Create user entry in database
-                        var userID = auth.currentUser?.uid
-                        if (userID != null) {
-                            var documentReference : DocumentReference
-                            documentReference = fstore.collection("users").document(userID)
-                            var user : HashMap<String, String> = HashMap()
-                            user.put("email", email)
+                        val userID = auth.currentUser?.uid
+                        MathWiz.userData?.id =userID
+                            if (userID != null) {
+                            val documentReference : DocumentReference = fstore.collection("users").document(userID)
+                            val user : HashMap<String, String> = HashMap()
+                            user["email"] = email
+                            user["name"] = name.toString()
+                            user["grade"] = grade.toString()
                             documentReference.set(user).addOnCompleteListener { task2 ->
                                 if (task2.isSuccessful) {
-                                    Log.e("SignupFragment","User entry created")
+                                    val statisticsCollection: CollectionReference = documentReference.collection("statistics")
+                                    val map : HashMap<String, Int> = HashMap()
+                                    map["correct"] = 0
+                                    map["total"]= 0
+                                    fstore.runBatch { batch ->
+                                        for (i in 3..5){
+                                            val additionDocument: DocumentReference = statisticsCollection.document("Addition - $i")
+                                            batch.set(additionDocument, map)
+                                            val subtractionDocument: DocumentReference = statisticsCollection.document("Subtraction - $i")
+                                            batch.set(subtractionDocument, map)
+                                            val multiplicationDocument: DocumentReference = statisticsCollection.document("Multiplication - $i")
+                                            batch.set(multiplicationDocument, map)
+                                            val divisionDocument: DocumentReference = statisticsCollection.document("Division - $i")
+                                            batch.set(divisionDocument, map)
+                                        }
+                                    }.addOnCompleteListener {
+                                            Log.e("SignupFragment","User entry created")
+                                    }
                                 }
                             }
                         }

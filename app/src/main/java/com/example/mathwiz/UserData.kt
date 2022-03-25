@@ -13,6 +13,7 @@ class UserData (context: Context)
     private val nameName = "name"
     private val gradeName = "grade"
     private val emailName = "email"
+    private val userId = "id"
 
     private val preferences: SharedPreferences = context.getSharedPreferences(preferencesFileName, Context.MODE_PRIVATE)
 
@@ -28,4 +29,7 @@ class UserData (context: Context)
         get() = preferences.getString(emailName, "")
         set(value) = preferences.edit().putString(emailName, value).apply()
 
+    var id: String?
+        get() = preferences.getString(userId, "")
+        set(value) = preferences.edit().putString(userId, value).apply()
 }

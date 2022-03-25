@@ -10,13 +10,11 @@ import android.widget.Button
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import com.example.mathwiz.LoginActivity
-import com.example.mathwiz.MathWiz
-import com.example.mathwiz.R
-import com.example.mathwiz.auth
+import com.example.mathwiz.*
 import com.example.mathwiz.databinding.FragmentProfileBinding
 import com.google.android.material.snackbar.BaseTransientBottomBar
 import com.google.android.material.snackbar.Snackbar
+import com.google.firebase.firestore.DocumentReference
 import java.io.*
 import java.lang.Exception
 
@@ -116,9 +114,19 @@ class ProfileFragment : Fragment(), View.OnClickListener {
     private fun saveProfile(name :String, grade : String, email : String?){
         MathWiz.userData?.name = name
         MathWiz.userData?.grade = grade
+
         if(email != ""){
-            MathWiz.userData?.email = email
+            val userID = auth.currentUser?.uid
+            if (userID != null) {
+                val documentReference: DocumentReference = fstore.collection("users").document(userID)
+                val user: HashMap<String, String> = HashMap()
+                user["email"] = MathWiz.userData?.email.toString()
+                user["grade"] = MathWiz.userData?.grade.toString()
+                user["name"] = MathWiz.userData?.name.toString()
+                documentReference.set(user)
+            }
         }
+
     }
 
     override fun onDestroyView() {

@@ -11,6 +11,8 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.mathwiz.MathWiz
 import com.example.mathwiz.databinding.FragmentStatisticsBinding
+import com.example.mathwiz.fstore
+import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.firestore.FirebaseFirestore
 
 
@@ -38,14 +40,14 @@ class StatisticsFragment : Fragment() {
             textView.text = it
         }
 
-        val db = FirebaseFirestore.getInstance()
         val categoryNames: ArrayList<String> = ArrayList()
         val userId = MathWiz.userData?.id
+        if(userId?.isNotBlank() == true){
         val grade = MathWiz.userData?.grade
         val spinner = binding.categoriesSpinner
         val pieChart = binding.statsProgressbar
         val pieChartText = binding.pieChartText
-        db.collection("categories").document(grade.toString()).get().addOnCompleteListener{ task ->
+        fstore.collection("categories").document(grade.toString()).get().addOnCompleteListener{ task ->
             if (task.isSuccessful) {
                 val document = task.result
                 if (document != null) {
@@ -70,17 +72,17 @@ class StatisticsFragment : Fragment() {
                 position: Int,
                 id: Long
             ) {
-                db.collection("users").document(userId.toString()).collection("statistics").document(categoryNames[position]).get().addOnCompleteListener{ task ->
+                fstore.collection("users").document(userId.toString()).collection("statistics")
+                    .document(categoryNames[position]).get().addOnCompleteListener { task ->
                     if (task.isSuccessful) {
                         val document = task.result
                         if (document != null) {
                             val correct = document.getDouble("correct")
                             val total = document.getDouble("total")
-                            if (total != 0.0){
-                                pieChart.progress =  ((correct!! / total !!) * 100).toInt()
-                            }
-                            else{
-                                pieChart.progress =  0
+                            if (total != 0.0) {
+                                pieChart.progress = ((correct!! / total!!) * 100).toInt()
+                            } else {
+                                pieChart.progress = 0
                             }
                             pieChartText.text = "${correct?.toInt()} / ${total.toInt()}"
                         } else {
@@ -95,15 +97,18 @@ class StatisticsFragment : Fragment() {
             override fun onNothingSelected(p0: AdapterView<*>?) {
                 TODO("Not yet implemented")
             }
-        }
-
-        // Add a Pie Chart
-
-
-
+        }}
         return root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        val userId = MathWiz.userData?.id
+        if(userId.isNullOrBlank()){
+            Snackbar.make(binding.constraintLayout, "Please SignUp to view Statistics", Snackbar.LENGTH_LONG).show()
+        }
+    }
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null

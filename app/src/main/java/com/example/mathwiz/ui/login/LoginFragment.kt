@@ -3,19 +3,18 @@ package com.example.mathwiz.ui.login
 import android.content.Intent
 import android.os.Bundle
 import android.text.TextUtils
+import android.util.Log
 import android.util.Patterns
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import com.example.mathwiz.HomeActivity
-import com.example.mathwiz.MathWiz
-import com.example.mathwiz.R
-import com.example.mathwiz.auth
+import com.example.mathwiz.*
 import com.example.mathwiz.databinding.FragmentLoginBinding
 import com.google.android.material.snackbar.BaseTransientBottomBar
 import com.google.android.material.snackbar.Snackbar
+import com.google.firebase.firestore.DocumentReference
 
 
 class LoginFragment : Fragment() {
@@ -56,14 +55,29 @@ class LoginFragment : Fragment() {
                         //Save the email locally
                         MathWiz.userData?.email = email
 
-                        if(MathWiz.userData?.name == ""){
-                            findNavController().navigate(R.id.action_LoginFragment_to_EnterDetailsFragment)
-                        } else {
-                            //Proceed to Home
-                            Snackbar.make(view, "Sign up successful!", BaseTransientBottomBar.LENGTH_SHORT).show()
-                            val intent = Intent(this.context, HomeActivity::class.java).apply {
+                        //Retrieve userid
+                        val userID = auth.currentUser?.uid
+                        MathWiz.userData?.id = userID
+                        if(userID != null){
+                            val documentReference : DocumentReference = fstore.collection("users").document(userID)
+                            documentReference.get().addOnCompleteListener { task ->
+                                if(task.isSuccessful){
+                                    //Retrieve name, and grade from database
+                                    val document = task.result
+                                    val name = document.getString("name")
+                                    val grade = document.getString("grade")
+                                    MathWiz.userData?.name = name
+                                    MathWiz.userData?.grade = grade
+
+                                    //Proceed to Home
+                                    Snackbar.make(view, "Login successful!", BaseTransientBottomBar.LENGTH_SHORT).show()
+                                    val intent = Intent(this.context, HomeActivity::class.java).apply {
+                                    }
+                                    startActivity(intent)
+                                }
+                            }.addOnFailureListener { exception ->
+                                Snackbar.make(view,exception.localizedMessage,BaseTransientBottomBar.LENGTH_SHORT).show()
                             }
-                            startActivity(intent)
                         }
                     }
                 }.addOnFailureListener { exception ->

@@ -11,13 +11,13 @@
         android:id="@+id/etSearchCategory"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="56dp"
         android:ems="10"
         android:hint="Search Category"
         android:inputType="text"
         android:minHeight="48dp"
         app:layout_constraintEnd_toStartOf="@+id/btnSearch"
-        app:layout_constraintHorizontal_bias="0.571"
+        app:layout_constraintHorizontal_bias="0.576"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -25,8 +25,8 @@
         android:id="@+id/btnSearch"
         android:layout_width="63dp"
         android:layout_height="51dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="48dp"
+        android:layout_marginTop="52dp"
+        android:layout_marginEnd="60dp"
         android:drawableLeft="@android:drawable/ic_menu_search"
         android:padding="16dp"
         android:text="Search"
@@ -36,13 +36,13 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view_item"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="403dp"
+        android:layout_height="515dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etSearchCategory"
-        />
+        app:layout_constraintTop_toBottomOf="@+id/btnSearch"
+        app:layout_constraintVertical_bias="0.0" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

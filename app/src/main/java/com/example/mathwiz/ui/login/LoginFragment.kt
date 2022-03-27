@@ -89,7 +89,7 @@ class LoginFragment : Fragment() {
             findNavController().navigate(R.id.action_LoginFragment_to_ChangePasswordFragment)
         }
         binding.signupButton.setOnClickListener {
-            findNavController().navigate(R.id.action_LoginFragment_to_SignupFragment)
+            findNavController().navigate(R.id.action_LoginFragment_to_EnterDetailsFragment)
         }
     }
 

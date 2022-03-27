@@ -30,6 +30,11 @@ class ProfileFragment : Fragment(), View.OnClickListener {
 
     private val PROFILE_FILE_NAME : String = "profile"
 
+    override fun onViewStateRestored(savedInstanceState: Bundle?) {
+        super.onViewStateRestored(savedInstanceState)
+        initProfileData()
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -83,9 +88,17 @@ class ProfileFragment : Fragment(), View.OnClickListener {
                 }
             }
             R.id.sign_or_logout_button ->{
-                // todo navigate to sign up or logout
                 if(inEditing){
-                    _binding!!.signOrLogoutButton.setText("Cancel")
+
+                    //_binding!!.profileEmail.isEnabled = !_binding!!.profileEmail.isEnabled
+                    _binding!!.profileName.isEnabled = !_binding!!.profileName.isEnabled
+                    _binding!!.profileGrade.setEnabled(!_binding!!.profileGrade.isEnabled)
+
+                    _binding!!.editButton.setText("Edit Profile")
+                    _binding!!.signOrLogoutButton.setText("Logout")
+
+                    // change not in editing
+                    inEditing = !inEditing
                 }else{
                     Log.e("ProfileFragment","Sign Up or Logout")
 

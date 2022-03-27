@@ -25,9 +25,9 @@ class ReminderAdapter(var context: Context, var arr:ArrayList<ReminderModel>)  :
             view = convertView
             vH = view.tag as ViewHolder
         }
-        vH.textView?.text = arr.get(position).hour.toString()
-        vH.textView2?.text = arr.get(position).min.toString()
-        vH.textView3?.text = if(arr.get(position).hour >= 12) "PM" else "AM"
+        vH.textView?.text = arr[position].hour.toString()
+        vH.textView2?.text = if(arr[position].min != 0) arr[position].min.toString() else "00"
+        vH.textView3?.text = if(arr[position].hour >= 12) "PM" else "AM"
 
         return view!!
     }

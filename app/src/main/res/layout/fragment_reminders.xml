@@ -65,6 +65,7 @@
             android:backgroundTint="@color/mathwiz_purple"
             android:src="@drawable/ic_baseline_add_24"
             android:tooltipText="@string/add"
+            android:foregroundTint="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.95"

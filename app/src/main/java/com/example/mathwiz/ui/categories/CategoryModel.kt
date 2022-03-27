@@ -1,4 +1,4 @@
-package com.example.mathwiz.models.categories
+package com.example.mathwiz.ui.categories
 
 data class CategoryModel (var categoryName: String, val categoryDescription: String) {
 }

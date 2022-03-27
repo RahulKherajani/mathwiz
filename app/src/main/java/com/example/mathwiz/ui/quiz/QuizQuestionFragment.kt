@@ -2,6 +2,7 @@ package com.example.mathwiz.ui.quiz
 
 import android.graphics.Typeface
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -32,6 +33,9 @@ class QuizQuestionFragment : Fragment(), View.OnClickListener {
     ): View? {
 
         _binding = FragmentQuizQuestionBinding.inflate(inflater, container, false)
+        // Recieve Value from Quiz Description Fragment
+        Log.i("TAG", arguments?.getString("categoryName").toString())
+
         createQuestions(grade, category)
         setQuestion()
         binding.option1.setOnClickListener(this)

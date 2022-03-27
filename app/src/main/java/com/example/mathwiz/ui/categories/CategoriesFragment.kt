@@ -12,10 +12,8 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mathwiz.MathWiz
-import com.example.mathwiz.adapters.categories.CategoryAdapter
 import com.example.mathwiz.databinding.FragmentCategoriesBinding
-import com.example.mathwiz.models.categories.CategoryModel
-import com.google.firebase.firestore.FirebaseFirestore
+import com.example.mathwiz.fstore
 
 
 class CategoriesFragment : Fragment() {
@@ -79,10 +77,9 @@ class CategoriesFragment : Fragment() {
 
     @SuppressLint("NotifyDataSetChanged")
     private fun setCategories(): ArrayList<CategoryModel> {
-        val db = FirebaseFirestore.getInstance()
         val arrayList: ArrayList<CategoryModel> = ArrayList()
         val grade = MathWiz.userData?.grade
-        db.collection("categories").document(grade.toString()).get().addOnCompleteListener{ task ->
+        fstore.collection("categories").document(grade.toString()).get().addOnCompleteListener{ task ->
             if (task.isSuccessful) {
             val document = task.result
             if (document != null) {

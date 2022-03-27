@@ -1,4 +1,4 @@
-package com.example.mathwiz.adapters.categories
+package com.example.mathwiz.ui.categories
 
 import android.content.Context
 import android.content.Intent
@@ -10,7 +10,6 @@ import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mathwiz.QuizActivity
 import com.example.mathwiz.R
-import com.example.mathwiz.models.categories.CategoryModel
 
 class CategoryAdapter(var context: Context, private var arrayList: ArrayList<CategoryModel>) :
     RecyclerView.Adapter<CategoryAdapter.ItemHolder>() {

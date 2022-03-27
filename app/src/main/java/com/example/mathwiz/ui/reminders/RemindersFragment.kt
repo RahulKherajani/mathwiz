@@ -54,7 +54,7 @@ class RemindersFragment : Fragment(), AdapterView.OnItemClickListener {
             view.context,
             MyPersistence.reminders
         )
-        notesListViewUI.setOnItemClickListener(this)
+        notesListViewUI.onItemClickListener = this
 
         view.findViewById<FloatingActionButton>(R.id.floating_btn_reminder).setOnClickListener {
             findNavController().navigate(R.id.action_navigation_reminders_to_addReminderFragment)

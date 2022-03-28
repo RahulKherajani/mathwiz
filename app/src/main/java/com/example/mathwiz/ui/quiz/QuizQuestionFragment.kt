@@ -1,31 +1,41 @@
+/*
+* This file contains backend logic for Quiz Generation and
+* Validation.
+* */
+
 package com.example.mathwiz.ui.quiz
 
 import android.graphics.Typeface
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import com.example.mathwiz.MathWiz
 import com.example.mathwiz.R
 import com.example.mathwiz.databinding.FragmentQuizQuestionBinding
 import java.lang.Math.abs
 
 class QuizQuestionFragment : Fragment(), View.OnClickListener {
 
+    // Declaration of variables.
     private var _binding: FragmentQuizQuestionBinding? = null
     private val binding get() = _binding!!
     private var questions = ArrayList<QuestionModel>()
-    private val grade = 3
-    private var category = "Addition"
+    private var gradeName = MathWiz.userData?.grade
+    private var grade = gradeName!!.split(" ")[1]
+    private var category = ""
     private var n = 0
     private val totalQuestions = 5
     private var answer = 0
     private var questionNumber = 1;
     private var optionPosition: Int = 0
     private var answerIndex = 0
+    private var result = 0
+    private var categoryName = ""
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -33,9 +43,9 @@ class QuizQuestionFragment : Fragment(), View.OnClickListener {
     ): View? {
 
         _binding = FragmentQuizQuestionBinding.inflate(inflater, container, false)
-        // Recieve Value from Quiz Description Fragment
-        Log.i("TAG", arguments?.getString("categoryName").toString())
-
+        // Receive Value from Quiz Description Fragment
+        categoryName = arguments?.getString("categoryName").toString()
+        category = arguments?.getString("categoryName").toString().split(" ")[0]
         createQuestions(grade, category)
         setQuestion()
         binding.option1.setOnClickListener(this)
@@ -44,9 +54,12 @@ class QuizQuestionFragment : Fragment(), View.OnClickListener {
         binding.option4.setOnClickListener(this)
         binding.submitQuestionButton.setOnClickListener(this)
 
+        // Setting Title for appbar
+        activity?.title = "Quiz"
         return binding.root
     }
 
+    // Function executed on submit question
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -59,15 +72,29 @@ class QuizQuestionFragment : Fragment(), View.OnClickListener {
                     questionNumber <= questions!!.size -> {
                         setQuestion()
                     }
+
+                    // Quiz ended. Navigates to Result fragment
                     else -> {
-                        findNavController().navigate(R.id.action_QuizQuestionFragment_to_QuizResultFragment)
+                        val bundle = bundleOf(
+                            "categoryName" to categoryName,
+                            "correct" to result,
+                            "total" to totalQuestions
+                        )
+                        findNavController().navigate(
+                            R.id.action_QuizQuestionFragment_to_QuizResultFragment,
+                            bundle
+                        )
                     }
                 }
-            } else {
+            }
+            // Score calculation and Highlighting the correct and incorrect answers
+            else {
                 val question = questions?.get(questionNumber - 1)
                 if (question!!.correctAnswer != optionPosition) {
+                    result = result - 1;
                     answerViewIncorrect(optionPosition)
                 }
+                result = result + 1
                 answerViewCorrect(question.correctAnswer)
                 if (questionNumber >= questions!!.size) {
                     binding.submitQuestionButton.text = "Finish"
@@ -86,39 +113,44 @@ class QuizQuestionFragment : Fragment(), View.OnClickListener {
         _binding = null
     }
 
-    private fun createQuestions(grade: Int, category: String) {
-
+    /*
+    * Function to create dynamic questions
+    * The difficulty of each question depends on the Grade.
+    * Example: A Grade Three user will get questions from numbers
+    * from 1 to 10 only.
+    * */
+    private fun createQuestions(grade: String, category: String) {
         for (i in (1..totalQuestions)) {
             var operand1 = 0
             var operand2 = 0
             var operator = ""
-            if (grade == 3) {
+            if (grade == "Three") {
                 n = 1
             }
-            if (grade == 4) {
+            if (grade == "Four") {
                 n = 2
             }
-            if (grade == 5) {
+            if (grade == "Five") {
                 n = 3
             }
 
-            if (category === "Addition") {
+            if (category == "Addition") {
                 operator = "+"
             }
-            if (category === "Subtraction") {
+            if (category == "Subtraction") {
                 operator = "-"
             }
-            if (category === "Multiplication") {
-                operator = "*"
-                if (grade === 3) {
+            if (category == "Multiplication") {
+                operator = "x"
+                if (grade == "Three") {
                     n = 1
                 } else {
                     n = 2
                 }
             }
-            if (category === "Division") {
+            if (category == "Division") {
                 operator = "/"
-                if (grade === 3) {
+                if (grade == "Three") {
                     n = 1
                 } else {
                     n = 2
@@ -133,18 +165,18 @@ class QuizQuestionFragment : Fragment(), View.OnClickListener {
                 operand1 = operand2
                 operand2 = temp
             }
-            if (category === "Division") {
+            if (category == "Division") {
                 operand1 = (1..10).random() * operand2
             }
 
-            if (operator === "+") {
+            if (operator == "+") {
                 answer = operand1 + operand2
-            } else if (operator === "-") {
+            } else if (operator == "-") {
                 answer = operand1 - operand2
-            } else if (operator === "/") {
+            } else if (operator == "/") {
                 answer = operand1 / operand2
             }
-            if (operator === "*") {
+            if (operator == "x") {
                 answer = operand1 * operand2
             }
 
@@ -170,10 +202,12 @@ class QuizQuestionFragment : Fragment(), View.OnClickListener {
         }
     }
 
+    // Function to find indedx of the correct answer
     private fun findIndex(arr: ArrayList<Int>, item: Int): Int {
         return arr.indexOf(item)
     }
 
+    //Function to bind the question and its option on screen
     private fun setQuestion() {
         val question = questions!!.get(questionNumber - 1)
         defaultSettings()
@@ -190,6 +224,7 @@ class QuizQuestionFragment : Fragment(), View.OnClickListener {
         binding.option4.text = question.option4
     }
 
+    // Function to get back default UI settings
     private fun defaultSettings() {
         val options = ArrayList<TextView>()
         options.add(0, binding.option1)
@@ -204,6 +239,7 @@ class QuizQuestionFragment : Fragment(), View.OnClickListener {
         }
     }
 
+    // Function for OnClick Listener
     override fun onClick(p0: View?) {
 
         when (p0?.id) {
@@ -222,6 +258,10 @@ class QuizQuestionFragment : Fragment(), View.OnClickListener {
         }
     }
 
+    /*
+    * Function which displays the correct answer after each
+    * question attempted.
+    * */
     private fun answerViewCorrect(answer: Int) {
         binding.option1.isClickable = false
         binding.option2.isClickable = false
@@ -244,6 +284,10 @@ class QuizQuestionFragment : Fragment(), View.OnClickListener {
         }
     }
 
+    /*
+  * Function which displays the incorrect answer after each
+  * question attempted.
+  * */
     private fun answerViewIncorrect(answer: Int) {
         when (answer) {
             1 -> {

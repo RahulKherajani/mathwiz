@@ -1,3 +1,7 @@
+/*
+* This is the Activity File for all Quiz Fragments
+* */
+
 package com.example.mathwiz
 
 import android.os.Bundle

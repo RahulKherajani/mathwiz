@@ -1,3 +1,10 @@
+/*
+* This file contains Question Model.
+* Each question will have a unique id,
+* question string dynamically generated,
+* four options, and a correct answer.
+* */
+
 package com.example.mathwiz.ui.quiz
 
 data class QuestionModel(

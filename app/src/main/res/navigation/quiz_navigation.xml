@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/QuizDescriptionFragment">
+
+    <fragment
+        android:id="@+id/QuizDescriptionFragment"
+        android:name="com.example.mathwiz.ui.quiz.QuizDescriptionFragment"
+        tools:layout="@layout/fragment_quiz_description">
+
+        <action
+            android:id="@+id/action_QuizDescriptionFragment_to_QuizQuestionFragment"
+            app:destination="@id/QuizQuestionFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/QuizQuestionFragment"
+        android:name="com.example.mathwiz.ui.quiz.QuizQuestionFragment"
+        tools:layout="@layout/fragment_quiz_question">
+
+        <action
+            android:id="@+id/action_QuizQuestionFragment_to_QuizResultFragment"
+            app:destination="@id/QuizResultFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/QuizResultFragment"
+        android:name="com.example.mathwiz.ui.quiz.QuizResultFragment"
+        tools:layout="@layout/fragment_quiz_result">
+    </fragment>
+</navigation>

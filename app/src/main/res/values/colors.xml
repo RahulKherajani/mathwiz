@@ -7,4 +7,10 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name ="mathwiz_purple">#572384</color>
+    <color name ="mathwiz_opaque_purple">#8235c4</color>
+    <color name ="mathwiz_grey">#DEDEDE</color>
+    <color name ="mathwiz_green">#4CAF50</color>
+    <color name ="mathwiz_red">#F44336</color>
+    <color name ="mathwiz_blue">#3F51B5</color>
 </resources>

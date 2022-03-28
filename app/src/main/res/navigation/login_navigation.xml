@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/login_navigation.xml"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:startDestination="@id/navigation_new_user">
+
+    <fragment
+        android:id="@+id/navigation_new_user"
+        android:name="com.example.mathwiz.ui.login.NewUserFragment"
+        android:label="@string/title_new_user"
+        tools:layout="@layout/fragment_new_user">
+        <action
+            android:id="@+id/action_NewUserFragment_to_LoginFragment"
+            app:destination="@id/navigation_login" />
+        <action
+            android:id="@+id/action_NewUserFragment_to_EnterDetailsFragment"
+            app:destination="@id/navigation_enter_details" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_enter_details"
+        android:name="com.example.mathwiz.ui.login.EnterDetailsFragment"
+        android:label="@string/title_enter_details"
+        tools:layout="@layout/fragment_enter_details">
+        <action
+            android:id="@+id/action_EnterDetailsFragment_to_WantSignupFragment"
+            app:destination="@id/navigation_want_signup" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_want_signup"
+        android:name="com.example.mathwiz.ui.login.WantSignupFragment"
+        android:label="@string/title_want_signup"
+        tools:layout="@layout/fragment_want_signup">
+        <action
+            android:id="@+id/action_WantSignup_to_SignupFragment"
+            app:destination="@id/navigation_signup" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_login"
+        android:name="com.example.mathwiz.ui.login.LoginFragment"
+        android:label="@string/title_login"
+        tools:layout="@layout/fragment_login">
+    <action
+        android:id="@+id/action_LoginFragment_to_ChangePasswordFragment"
+        app:destination="@id/navigation_change_Password" />
+    <action
+        android:id="@+id/action_LoginFragment_to_SignupFragment"
+        app:destination="@id/navigation_signup" />
+    <action
+        android:id="@+id/action_LoginFragment_to_EnterDetailsFragment"
+        app:destination="@id/navigation_enter_details" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_change_Password"
+        android:name="com.example.mathwiz.ui.login.ChangePasswordFragment"
+        android:label="@string/title_change_password"
+        tools:layout="@layout/fragment_change_password">
+        <action
+            android:id="@+id/action_ChangePasswordFragment_to_LoginFragment"
+            app:destination="@id/navigation_login" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_signup"
+        android:name="com.example.mathwiz.ui.login.SignupFragment"
+        android:label="@string/title_signup"
+        tools:layout="@layout/fragment_signup">
+        <action
+            android:id="@+id/action_SignupFragment_to_LoginFragment"
+            app:destination="@id/navigation_login" />
+        <action
+            android:id="@+id/action_SignupFragment_to_EnterDetailsFragment"
+            app:destination="@id/navigation_enter_details" />
+    </fragment>
+
+</navigation>

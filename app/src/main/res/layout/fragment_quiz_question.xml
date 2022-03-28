@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".QuizActivity">
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="@android:style/Widget.ProgressBar.Horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:progress="25"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/questionBox"
+        android:layout_width="300dp"
+        android:layout_height="200dp"
+        android:layout_marginTop="84dp"
+        android:background="@drawable/ic_question_box"
+        android:gravity="center"
+        android:lines="3"
+        android:text="\t\t    25 \n + 20"
+        android:textSize="40dp"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/option1"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="30dp"
+        android:layout_marginTop="116dp"
+        android:text="50"
+        android:textColor="@color/white"
+        android:textAlignment="center"
+        android:padding="5dp"
+        android:background="@drawable/ic_quiz_option"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/questionBox"
+        android:clickable="true"/>
+
+
+    <TextView
+        android:id="@+id/option2"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+        android:text="45"
+        android:textColor="@color/white"
+        android:textAlignment="center"
+        android:padding="5dp"
+        android:background="@drawable/ic_quiz_option"
+        android:layout_marginTop="48dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/option1"
+        android:clickable="true"/>
+
+
+
+    <TextView
+        android:id="@+id/option3"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+        android:text="47"
+        android:textColor="@color/white"
+        android:textAlignment="center"
+        android:padding="5dp"
+        android:background="@drawable/ic_quiz_option"
+        android:layout_marginTop="48dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/option2"
+        android:clickable="true"/>
+
+
+
+    <TextView
+        android:id="@+id/option4"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+        android:layout_marginTop="48dp"
+        android:text="55"
+        android:textColor="@color/white"
+        android:textAlignment="center"
+        android:padding="5dp"
+        android:background="@drawable/ic_quiz_option"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/option3"
+        android:clickable="true"/>
+
+
+    <Button
+        android:id="@+id/submitQuestionButton"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:layout_marginTop="10dp"
+        android:text="Submit"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/option4"
+        app:layout_constraintVertical_bias="0.300" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

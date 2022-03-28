@@ -106,7 +106,7 @@ class StatisticsFragment : Fragment() {
         // Display a SnackBar if user is not registered i.e userId id null
         val userId = MathWiz.userData?.id
         if(userId.isNullOrBlank()){
-            Snackbar.make(binding.constraintLayout, "Please SignUp to view Statistics", Snackbar.LENGTH_LONG).show()
+            Snackbar.make(binding.root, "Please Signup to view Statistics", Snackbar.LENGTH_LONG).show()
         }
     }
 

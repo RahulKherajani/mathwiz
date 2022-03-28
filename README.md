@@ -16,7 +16,7 @@ MathWiz is a math-learning app for Canadian kids in grades 3 to 5. Its primary f
 - [Kalim Nanji, BCS (B00796002)](mailto:kl360064@dal.ca)
 - [Lingzhi Chen, BCS (B00805300)](mailto:ln367292@dal.ca)
 - [Rahul Kherajani, MACS (B00884966)](mailto:rh346685@dal.ca)
-- [Yashvi Gulati (B00900339)](mailto:ys849413@dal.ca)
+- [Yashvi Gulati, MACS (B00900339)](mailto:ys849413@dal.ca)
 
 ## References
 

@@ -2,7 +2,7 @@
 * This file contains the backend logic for Quiz Results.
 * */
 
-package com.example.mathwiz.ui.quiz
+package com.example.mathwiz.fragments.quiz
 
 import android.content.Intent
 import android.os.Bundle

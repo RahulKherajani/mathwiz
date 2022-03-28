@@ -1,4 +1,8 @@
-package com.example.mathwiz.ui.reminders
+/*
+* This file contains the backend logic for Reminders Fragment.
+*/
+
+package com.example.mathwiz.fragments.reminders
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -6,12 +10,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
-import android.widget.ArrayAdapter
 import android.widget.ListView
-import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import com.example.mathwiz.R
-import com.example.mathwiz.ui.reminders.MyPersistence
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class RemindersFragment : Fragment(), AdapterView.OnItemClickListener {

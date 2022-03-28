@@ -1,3 +1,5 @@
+/* LoginActivity with No Action Bar
+and 6 Fragments: ChangePassword, EnterDetails, Login, NewUser, Signup, WantSignup */
 package com.example.mathwiz
 
 import androidx.appcompat.app.AppCompatActivity

@@ -1,3 +1,6 @@
+/* HomeActivity with Bottom Navigation Bar
+and 6 Fragments: Categories, Statistics, Profile, Reminder, AddReminder, EditReminder */
+
 package com.example.mathwiz
 
 import android.os.Bundle

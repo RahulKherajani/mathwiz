@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/QuizDescriptionFragment"
-        android:name="com.example.mathwiz.ui.quiz.QuizDescriptionFragment"
+        android:name="com.example.mathwiz.fragments.quiz.QuizDescriptionFragment"
         tools:layout="@layout/fragment_quiz_description">
 
         <action
@@ -16,7 +16,7 @@
     </fragment>
     <fragment
         android:id="@+id/QuizQuestionFragment"
-        android:name="com.example.mathwiz.ui.quiz.QuizQuestionFragment"
+        android:name="com.example.mathwiz.fragments.quiz.QuizQuestionFragment"
         tools:layout="@layout/fragment_quiz_question">
 
         <action
@@ -26,7 +26,7 @@
 
     <fragment
         android:id="@+id/QuizResultFragment"
-        android:name="com.example.mathwiz.ui.quiz.QuizResultFragment"
+        android:name="com.example.mathwiz.fragments.quiz.QuizResultFragment"
         tools:layout="@layout/fragment_quiz_result">
     </fragment>
 </navigation>

@@ -7,25 +7,25 @@
 
     <fragment
         android:id="@+id/navigation_categories"
-        android:name="com.example.mathwiz.ui.categories.CategoriesFragment"
+        android:name="com.example.mathwiz.fragments.categories.CategoriesFragment"
         android:label="@string/title_categories"
         tools:layout="@layout/fragment_categories" />
 
     <fragment
         android:id="@+id/navigation_statistics"
-        android:name="com.example.mathwiz.ui.statistics.StatisticsFragment"
+        android:name="com.example.mathwiz.fragments.statistics.StatisticsFragment"
         android:label="@string/title_statistics"
         tools:layout="@layout/fragment_statistics" />
 
     <fragment
         android:id="@+id/navigation_profile"
-        android:name="com.example.mathwiz.ui.profile.ProfileFragment"
+        android:name="com.example.mathwiz.fragments.profile.ProfileFragment"
         android:label="@string/title_profile"
         tools:layout="@layout/fragment_profile" />
 
     <fragment
         android:id="@+id/navigation_reminders"
-        android:name="com.example.mathwiz.ui.reminders.RemindersFragment"
+        android:name="com.example.mathwiz.fragments.reminders.RemindersFragment"
         android:label="@string/title_reminders"
         tools:layout="@layout/fragment_reminders" >
         <action
@@ -38,12 +38,12 @@
     <fragment
         android:id="@+id/addReminderFragment"
 
-        android:name="com.example.mathwiz.ui.reminders.AddReminderFragment"
+        android:name="com.example.mathwiz.fragments.reminders.AddReminderFragment"
         android:label="Add Reminder"
         tools:layout="@layout/fragment_add_reminder" />
     <fragment
         android:id="@+id/editReminderFragment"
-        android:name="com.example.mathwiz.ui.reminders.EditReminderFragment"
+        android:name="com.example.mathwiz.fragments.reminders.EditReminderFragment"
         android:label="Edit Reminder"
         tools:layout="@layout/fragment_edit_reminder" />
 

@@ -1,4 +1,7 @@
-package com.example.mathwiz.ui.profile
+/*
+* This file contains the backend logic for Profile.
+*/
+package com.example.mathwiz.fragments.profile
 
 import android.content.Intent
 import android.os.Bundle
@@ -9,14 +12,9 @@ import android.view.ViewGroup
 import android.widget.Button
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController
 import com.example.mathwiz.*
 import com.example.mathwiz.databinding.FragmentProfileBinding
-import com.google.android.material.snackbar.BaseTransientBottomBar
-import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.firestore.DocumentReference
-import java.io.*
-import java.lang.Exception
 
 class ProfileFragment : Fragment(), View.OnClickListener {
 

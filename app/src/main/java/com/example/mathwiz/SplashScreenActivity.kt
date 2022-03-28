@@ -1,3 +1,4 @@
+/* SplashScreen Activity with Animations */
 package com.example.mathwiz
 
 import android.content.Intent

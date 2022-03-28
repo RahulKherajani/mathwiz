@@ -1,6 +1,8 @@
-package com.example.mathwiz.ui.reminders
+/*
+* This file contains the persistence logic for Reminders.
+*/
 
-import com.example.mathwiz.ui.reminders.ReminderModel
+package com.example.mathwiz.fragments.reminders
 
 object MyPersistence {
 

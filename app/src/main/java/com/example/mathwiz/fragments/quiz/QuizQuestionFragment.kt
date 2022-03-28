@@ -3,7 +3,7 @@
 * Validation.
 * */
 
-package com.example.mathwiz.ui.quiz
+package com.example.mathwiz.fragments.quiz
 
 import android.graphics.Typeface
 import android.os.Bundle

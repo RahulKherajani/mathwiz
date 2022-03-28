@@ -5,7 +5,7 @@
 * four options, and a correct answer.
 * */
 
-package com.example.mathwiz.ui.quiz
+package com.example.mathwiz.fragments.quiz
 
 data class QuestionModel(
     val id: Int,

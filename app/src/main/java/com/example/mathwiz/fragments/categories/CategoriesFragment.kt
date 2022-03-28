@@ -1,4 +1,8 @@
-package com.example.mathwiz.ui.categories
+/*
+* This file contains the backend logic for Categories Fragment.
+*/
+
+package com.example.mathwiz.fragments.categories
 
 import android.annotation.SuppressLint
 import android.os.Bundle
@@ -7,7 +11,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -20,8 +23,6 @@ class CategoriesFragment : Fragment() {
 
     private var _binding: FragmentCategoriesBinding? = null
 
-    // This property is only valid between onCreateView and
-    // onDestroyView.
     private val binding get() = _binding!!
     private var recyclerView: RecyclerView? = null
     private var category: ArrayList<CategoryModel>? = null
@@ -35,20 +36,18 @@ class CategoriesFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val categoriesViewModel =
-            ViewModelProvider(this).get(CategoriesViewModel::class.java)
 
         _binding = FragmentCategoriesBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        categoriesViewModel.text.observe(viewLifecycleOwner) {
-        }
-
         recyclerView = binding.recyclerViewItem
+
+        //Grid Layout Settings
         gridLayoutManager =
-            GridLayoutManager(activity, 3, LinearLayoutManager.VERTICAL, false)
+            GridLayoutManager(activity, 2, LinearLayoutManager.VERTICAL, false)
         recyclerView?.layoutManager = gridLayoutManager
         recyclerView?.setHasFixedSize(true)
+
 
         category = ArrayList()
         category = setCategories()
@@ -56,6 +55,7 @@ class CategoriesFragment : Fragment() {
         categoryAdapter = activity?.let { CategoryAdapter(it, filteredCategory!!) }
         recyclerView?.adapter = categoryAdapter
 
+        //onClick Listener on Search Button - Search Functionality
         binding.btnSearch.setOnClickListener {
             filteredCategory?.clear()
             val searchText = binding.etSearchCategory.text.toString().lowercase()
@@ -75,6 +75,7 @@ class CategoriesFragment : Fragment() {
         return root
     }
 
+    // Function to retrieve categories from Firestore
     @SuppressLint("NotifyDataSetChanged")
     private fun setCategories(): ArrayList<CategoryModel> {
         val arrayList: ArrayList<CategoryModel> = ArrayList()

@@ -1,4 +1,7 @@
-package com.example.mathwiz.ui.login
+/*
+* This file contains the backend logic for Enter Details.
+* */
+package com.example.mathwiz.fragments.login
 
 import android.content.Intent
 import android.os.Bundle

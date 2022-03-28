@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:id="@+id/profile_fragment"
     android:background="@color/white"
-    tools:context=".ui.profile.ProfileFragment">
+    tools:context=".fragments.profile.ProfileFragment">
 
 
     <LinearLayout

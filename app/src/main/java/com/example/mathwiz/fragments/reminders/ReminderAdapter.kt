@@ -1,4 +1,8 @@
-package com.example.mathwiz.ui.reminders
+/*
+* This file contains the adapter for displaying Reminders.
+*/
+
+package com.example.mathwiz.fragments.reminders
 
 import android.content.Context
 import android.view.View
@@ -7,7 +11,6 @@ import android.widget.AdapterView
 import android.widget.BaseAdapter
 import android.widget.TextView
 import com.example.mathwiz.R
-import com.example.mathwiz.ui.reminders.ReminderModel
 
 class ReminderAdapter(var context: Context, var arr:ArrayList<ReminderModel>)  : BaseAdapter(),
     AdapterView.OnItemClickListener {

@@ -1,6 +1,4 @@
-/*
-* This is the Activity File for all Quiz Fragments
-* */
+/* QuizActivity with 3 Fragments: QuizDescription, QuizQuestion, QuizResult */
 
 package com.example.mathwiz
 
@@ -14,7 +12,6 @@ import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import com.example.mathwiz.R
 import com.example.mathwiz.databinding.ActivityQuizBinding
-
 
 class QuizActivity : AppCompatActivity() {
 

@@ -1,4 +1,8 @@
-package com.example.mathwiz.ui.login
+/*
+* This file contains the backend logic for SignUp Fragment.
+*/
+
+package com.example.mathwiz.fragments.login
 
 import android.content.Intent
 import android.os.Bundle
@@ -8,7 +12,6 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import com.example.mathwiz.*
 import com.example.mathwiz.databinding.FragmentSignupBinding
@@ -16,7 +19,6 @@ import com.google.android.material.snackbar.BaseTransientBottomBar
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.DocumentReference
-import com.google.firebase.firestore.WriteBatch
 
 class SignupFragment : Fragment() {
 

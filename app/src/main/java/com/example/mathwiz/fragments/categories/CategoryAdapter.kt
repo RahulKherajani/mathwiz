@@ -1,4 +1,8 @@
-package com.example.mathwiz.ui.categories
+/*
+* This file contains the adapter for displaying Categories for Categories Fragment.
+*/
+
+package com.example.mathwiz.fragments.categories
 
 import android.content.Context
 import android.content.Intent
@@ -26,9 +30,9 @@ class CategoryAdapter(var context: Context, private var arrayList: ArrayList<Cat
     override fun onBindViewHolder(holder: ItemHolder, position: Int) {
 
         val category: CategoryModel = arrayList[position]
-
         holder.categoryName.text = category.categoryName
 
+        //onClickListener on each Card! Start Quiz Activity
         holder.cardCategory.setOnClickListener {
             val intent = Intent(context, QuizActivity::class.java)
             intent.putExtra("categoryName", category.categoryName)
@@ -40,7 +44,7 @@ class CategoryAdapter(var context: Context, private var arrayList: ArrayList<Cat
 
     class ItemHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-        var categoryName: TextView = itemView.findViewById<TextView>(R.id.title_text_view)
-        var cardCategory = itemView.findViewById<CardView>(R.id.cardCategory)
+        var categoryName: TextView = itemView.findViewById(R.id.title_text_view)
+        var cardCategory: CardView = itemView.findViewById(R.id.cardCategory)
     }
 }

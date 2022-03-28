@@ -1,4 +1,7 @@
-package com.example.mathwiz.ui.login
+/*
+* This file contains the backend logic for Change Password.
+*/
+package com.example.mathwiz.fragments.login
 
 import android.os.Bundle
 import android.text.TextUtils

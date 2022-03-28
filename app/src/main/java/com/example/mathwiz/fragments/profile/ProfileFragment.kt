@@ -1,4 +1,7 @@
-package com.example.mathwiz.ui.profile
+/*
+* This file contains the backend logic for Profile.
+*/
+package com.example.mathwiz.fragments.profile
 
 import android.content.Intent
 import android.os.Bundle
@@ -9,14 +12,9 @@ import android.view.ViewGroup
 import android.widget.Button
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController
 import com.example.mathwiz.*
 import com.example.mathwiz.databinding.FragmentProfileBinding
-import com.google.android.material.snackbar.BaseTransientBottomBar
-import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.firestore.DocumentReference
-import java.io.*
-import java.lang.Exception
 
 class ProfileFragment : Fragment(), View.OnClickListener {
 
@@ -29,6 +27,11 @@ class ProfileFragment : Fragment(), View.OnClickListener {
     private var inEditing : Boolean = false
 
     private val PROFILE_FILE_NAME : String = "profile"
+
+    override fun onViewStateRestored(savedInstanceState: Bundle?) {
+        super.onViewStateRestored(savedInstanceState)
+        initProfileData()
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -52,40 +55,41 @@ class ProfileFragment : Fragment(), View.OnClickListener {
         when (v?.id) {
             R.id.edit_button -> {
 
-                //Verify that the email is in the correct format
-                var email = _binding!!.profileEmail.text.toString()
-                if(!android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()){
-                    Snackbar.make(v, "Invalid email address. Please re-enter.", BaseTransientBottomBar.LENGTH_SHORT).show()
-                } else {
+                //_binding!!.profileEmail.isEnabled = !_binding!!.profileEmail.isEnabled
+                _binding!!.profileName.isEnabled = !_binding!!.profileName.isEnabled
+                _binding!!.profileGrade.setEnabled(!_binding!!.profileGrade.isEnabled)
+
+                if(inEditing){
+                    saveProfile(_binding!!.profileName.text.toString(),_binding!!.profileGrade.selectedItem.toString(), _binding!!.profileEmail.text.toString())
+                    _binding!!.editButton.setText("Edit Profile")
+
+                    if(MathWiz.userData?.email == ""){
+                        _binding!!.signOrLogoutButton.setText("Sign Up")
+                    }else{
+                        _binding!!.signOrLogoutButton.setText("Logout")
+                    }
+
+                }else{
+                    Log.e("ProfileFragment", "Edit Profile")
+                    _binding!!.editButton.setText("Save")
+                    _binding!!.signOrLogoutButton.setText("Cancel")
+                }
+
+                // finally, change not in editing
+                inEditing = !inEditing
+            }
+            R.id.sign_or_logout_button ->{
+                if(inEditing){
 
                     //_binding!!.profileEmail.isEnabled = !_binding!!.profileEmail.isEnabled
                     _binding!!.profileName.isEnabled = !_binding!!.profileName.isEnabled
                     _binding!!.profileGrade.setEnabled(!_binding!!.profileGrade.isEnabled)
 
-                    if(inEditing){
-                        saveProfile(_binding!!.profileName.text.toString(),_binding!!.profileGrade.selectedItem.toString(), _binding!!.profileEmail.text.toString())
-                        _binding!!.editButton.setText("Edit Profile")
+                    _binding!!.editButton.setText("Edit Profile")
+                    _binding!!.signOrLogoutButton.setText("Logout")
 
-                        if(MathWiz.userData?.name == ""){
-                            _binding!!.signOrLogoutButton.setText("Sign Up")
-                        }else{
-                            _binding!!.signOrLogoutButton.setText("Logout")
-                        }
-
-                    }else{
-                        Log.e("ProfileFragment", "Edit Profile")
-                        _binding!!.editButton.setText("Save")
-                        _binding!!.signOrLogoutButton.setText("Cancel")
-                    }
-
-                    // finally, change not in editing
+                    // change not in editing
                     inEditing = !inEditing
-                }
-            }
-            R.id.sign_or_logout_button ->{
-                // todo navigate to sign up or logout
-                if(inEditing){
-                    _binding!!.signOrLogoutButton.setText("Cancel")
                 }else{
                     Log.e("ProfileFragment","Sign Up or Logout")
 

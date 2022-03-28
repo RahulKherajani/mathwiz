@@ -1,4 +1,7 @@
-package com.example.mathwiz.ui.profile
+/*
+* This file contains the data ViewModel for Profile
+*/
+package com.example.mathwiz.fragments.profile
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

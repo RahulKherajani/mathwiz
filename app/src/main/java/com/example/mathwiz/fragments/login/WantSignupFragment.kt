@@ -38,6 +38,7 @@ class WantSignupFragment : Fragment() {
             val intent = Intent(this.context, HomeActivity::class.java).apply {
             }
             startActivity(intent)
+            activity?.finish()
         }
 
     }

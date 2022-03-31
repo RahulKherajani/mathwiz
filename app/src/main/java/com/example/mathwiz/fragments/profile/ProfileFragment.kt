@@ -92,9 +92,7 @@ class ProfileFragment : Fragment(), View.OnClickListener {
                     inEditing = !inEditing
                 }else{
                     Log.e("ProfileFragment","Sign Up or Logout")
-
                     clearUserInfo()
-
                     if(MathWiz.userData?.email != ""){
                         auth.signOut()
                     }
@@ -103,6 +101,7 @@ class ProfileFragment : Fragment(), View.OnClickListener {
                     activity?.let {
                         val intent = Intent(it, LoginActivity::class.java)
                         it.startActivity(intent)
+                        activity?.finish()
                     }
                 }
             }
@@ -113,6 +112,7 @@ class ProfileFragment : Fragment(), View.OnClickListener {
         MathWiz.userData?.name = ""
         MathWiz.userData?.grade = ""
         MathWiz.userData?.email = ""
+        MathWiz.userData?.id = ""
     }
 
     private fun saveProfile(name :String, grade : String, email : String?){

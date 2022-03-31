@@ -76,6 +76,7 @@ class LoginFragment : Fragment() {
                                     val intent = Intent(this.context, HomeActivity::class.java).apply {
                                     }
                                     startActivity(intent)
+                                    activity?.finish()
                                 }
                             }.addOnFailureListener { exception ->
                                 Snackbar.make(view,exception.localizedMessage,BaseTransientBottomBar.LENGTH_SHORT).show()

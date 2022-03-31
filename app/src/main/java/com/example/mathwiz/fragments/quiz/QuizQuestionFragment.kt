@@ -91,10 +91,10 @@ class QuizQuestionFragment : Fragment(), View.OnClickListener {
             else {
                 val question = questions?.get(questionNumber - 1)
                 if (question!!.correctAnswer != optionPosition) {
-                    result = result - 1;
+                    result -= 1;
                     answerViewIncorrect(optionPosition)
                 }
-                result = result + 1
+                result += 1
                 answerViewCorrect(question.correctAnswer)
                 if (questionNumber >= questions!!.size) {
                     binding.submitQuestionButton.text = "Finish"
@@ -182,9 +182,9 @@ class QuizQuestionFragment : Fragment(), View.OnClickListener {
 
             var options = ArrayList<Int>()
             options.add(answer)
-            options.add(abs(answer - 1))
-            options.add(abs(answer + 1))
-            options.add(abs(answer + 2))
+            options.add(abs(answer - (1..3).random()))
+            options.add(abs(answer + (1..3).random()))
+            options.add(abs(answer + 2 * (1..3).random()))
 
             options.shuffle()
             answerIndex = findIndex(options, answer)

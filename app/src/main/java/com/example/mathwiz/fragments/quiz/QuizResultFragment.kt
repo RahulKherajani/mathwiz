@@ -4,7 +4,6 @@
 
 package com.example.mathwiz.fragments.quiz
 
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -23,7 +22,7 @@ class QuizResultFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
 
         _binding = FragmentQuizResultBinding.inflate(inflater, container, false)
 
@@ -70,8 +69,6 @@ class QuizResultFragment : Fragment() {
 
         // Navigates to Categories Page on onClick
         binding.goToCategoriesPageButton.setOnClickListener {
-            val myIntent = Intent(this.context, HomeActivity::class.java)
-            startActivity(myIntent)
             activity?.finish()
         }
 

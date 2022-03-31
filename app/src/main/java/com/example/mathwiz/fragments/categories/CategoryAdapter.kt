@@ -4,6 +4,7 @@
 
 package com.example.mathwiz.fragments.categories
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.view.LayoutInflater
@@ -15,11 +16,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.mathwiz.QuizActivity
 import com.example.mathwiz.R
 
+
 class CategoryAdapter(var context: Context, private var arrayList: ArrayList<CategoryModel>) :
     RecyclerView.Adapter<CategoryAdapter.ItemHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemHolder {
         val viewHolder = LayoutInflater.from(parent.context)
-            .inflate(R.layout.category, parent, false)
+            .inflate(R.layout.view_category, parent, false)
         return ItemHolder(viewHolder)
     }
 

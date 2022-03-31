@@ -4,7 +4,6 @@
 
 package com.example.mathwiz.fragments.quiz
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -12,7 +11,6 @@ import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import com.example.mathwiz.HomeActivity
 import com.example.mathwiz.R
 import com.example.mathwiz.databinding.FragmentQuizDescriptionBinding
 
@@ -24,7 +22,7 @@ class QuizDescriptionFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
 
         _binding = FragmentQuizDescriptionBinding.inflate(inflater, container, false)
 
@@ -40,8 +38,6 @@ class QuizDescriptionFragment : Fragment() {
 
         // onClick Listener for Exit Button
         binding.exitQuizButton.setOnClickListener {
-            val myIntent = Intent(this.context, HomeActivity::class.java)
-            startActivity(myIntent)
             activity?.finish()
         }
 

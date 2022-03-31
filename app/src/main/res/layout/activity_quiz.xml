@@ -20,7 +20,7 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <include layout="@layout/content_quiz" />
+    <include layout="@layout/view_quiz" />
 
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
